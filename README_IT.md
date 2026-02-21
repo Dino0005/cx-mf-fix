@@ -61,6 +61,7 @@ Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'appro
 2. Sposta `CX mf-fix.app` nella cartella Applicazioni
 3. **Solo la prima volta**: apri l'app. Se vedi l'errore "Impossibile aprire l'applicazione", è perché macOS blocca le app non firmate.
 Per risolvere, apri il Terminale ed esegui:
+
    ```bash
    sudo xattr -r -d com.apple.quarantine "/Applications/CX mf-fix.app"
    ```
