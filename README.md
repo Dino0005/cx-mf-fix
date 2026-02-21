@@ -44,7 +44,7 @@ This application provides a native macOS graphical interface for the mf-fix appr
 ## Requirements
 
 ### For Users
-- **macOS**: 15.0 or later recommended
+- **macOS**: 13.0 or later recommended
 - **CrossOver**: Installed in `/Applications/CrossOver.app`
 
 ### For Developers (Building from source)
