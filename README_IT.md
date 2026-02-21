@@ -10,7 +10,7 @@
 Un'applicazione nativa per macOS per applicare fix Media Foundation alle bottiglie CrossOver.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix.png" width="70%">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix_it.png" width="70%">
 </p>
 
 ## Contesto
