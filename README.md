@@ -105,8 +105,8 @@ Building with Xcode
 
 ### Prerequisites
 
-- macOS 13.0+
-- Xcode 15.0+
+- macOS 26.0+
+- Xcode 26.0+
 - Required files from mf-fix project:
   - `mf-dlls.zip` .zip file with DLL file folders (`system32/` and `syswow64/`)
   - `mf.reg` registry file
