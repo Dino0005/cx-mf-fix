@@ -103,14 +103,10 @@ The app performs the following steps:
 
 Building with Xcode
 
-### Prerequisites
-
-- macOS 26.0+
-- Xcode 26.0+
-- Required files from mf-fix project:
-  - `mf-dlls.zip` .zip file with DLL file folders (`system32/` and `syswow64/`)
-  - `mf.reg` registry file
-  - `wmf.reg` registry file
+Required files from mf-fix project:
+- `mf-dlls.zip` .zip file with DLL file folders (`system32/` and `syswow64/`)
+- `mf.reg` registry file
+- `wmf.reg` registry file
 
 Note: These required files are already included in the Resources folder of the project
 
