@@ -1,4 +1,6 @@
 # CX MF-Fix
+**English** | **[Italiano](README_IT.md)**
+
 
 ![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
 ![Swift: 6.2](https://img.shields.io/badge/Swift-6.2-orange)
