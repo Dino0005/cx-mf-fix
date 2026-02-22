@@ -119,7 +119,7 @@ Required files from mf-fix project:
 - `mf.reg` registry file
 - `wmf.reg` registry file
 
-Note: These required files are already included in the Resources folder of the project
+Note: The `mf-dlls.zip` is not included in the Resources folder of the project. However, it is provided within the pre-compiled release package in the Assets section for your convenience.
 
 ## Localization
 
