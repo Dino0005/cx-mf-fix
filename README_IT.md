@@ -29,9 +29,17 @@ Sebbene CrossOver includa il supporto per GStreamer, attualmente non può decodi
 
 **CXPatcher:** Sostituisce le vecchie librerie in CrossOver con versioni più recenti, inclusi i fix per GStreamer e Media Foundation, in modo che giochi come la serie Resident Evil possano riprodurre i filmati invece di bloccarsi su una schermata nera.
 
-**mf-fix (questo progetto):** Installa le DLL originali di Windows Media Foundation direttamente nella "bottiglia" CrossOver. Quando il gioco cerca di avviare un filmato, trova le librerie che si aspetta (le DLL) e il video parte. Questo risolve i blocchi o le schermate nere all'avvio del gioco o durante i caricamenti.
+**mf-fix:** Installa le DLL originali di Windows Media Foundation direttamente nella "bottiglia" CrossOver. Quando il gioco cerca di avviare un filmato, trova le librerie che si aspetta (le DLL) e il video parte. Questo risolve i blocchi o le schermate nere all'avvio del gioco o durante i caricamenti.
+
+### Perché Questo Strumento?
+
+Come dichiarato dal [supporto CodeWeavers](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), sebbene Wine (e quindi CrossOver) abbia una propria implementazione di Media Foundation, è ancora in fase di sviluppo e non può ancora decodificare tutti i formati video proprietari utilizzati nei giochi AAA moderni. CodeWeavers non può supportare o distribuire le librerie native di Windows Media Foundation a causa delle restrizioni di licenza.
+
+CX MF-Fix colma questa lacuna permettendo agli utenti di installare manualmente le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire.
 
 Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'approccio mf-fix, rendendo più semplice applicare la fix senza usare comandi da Terminale.
+
+> **Nota:** Questo è uno strumento non ufficiale. Non è affiliato, approvato o supportato da CodeWeavers o Microsoft.
 
 ## Caratteristiche
 
