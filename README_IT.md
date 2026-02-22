@@ -118,7 +118,7 @@ File richiesti dal progetto mf-fix:
 - `mf.reg` file di registro
 - `wmf.reg` file di registro
 
-Nota: Il file `mf-dlls.zip` non è incluso nella cartella Resources del progetto. Tuttavia, è disponibile all'interno del pacchetto di rilascio precompilato nella sezione Assets per comodità.
+**Nota**: Il file `mf-dlls.zip` non è incluso nella cartella Resources del progetto. Tuttavia, è disponibile all'interno del pacchetto di rilascio precompilato nella sezione Assets per comodità.
 
 ## Localizzazione
 
