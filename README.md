@@ -30,9 +30,17 @@ While CrossOver includes GStreamer support, it currently cannot decode all propr
 
 **CXPatcher:** Replaces older libraries in CrossOver with newer versions, including fixes for GStreamer and Media Foundation, so that games like the Resident Evil series can play cutscenes instead of freezing on a black screen.
 
-**mf-fix (this project):** Installs the original Windows Media Foundation DLLs directly into the CrossOver "bottle". When the game tries to start a cutscene, it finds the libraries it expects (the DLLs) and the video plays. This solves freezes or black screens at game startup or during loading screens.
+**cx-mf-fix (this project):** Installs the original Windows Media Foundation DLLs directly into the CrossOver "bottle". When the game tries to start a cutscene, it finds the libraries it expects (the DLLs) and the video plays. This solves freezes or black screens at game startup or during loading screens.
+
+### Why This Tool?
+
+As stated by [CodeWeavers support](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), while Wine (and thus CrossOver) has its own implementation of Media Foundation, it is still a work in progress and cannot yet decode all proprietary video formats used in modern AAA games. CodeWeavers cannot support or distribute native Windows Media Foundation libraries due to licensing restrictions.
+
+CX MF-Fix bridges this gap by allowing users to manually install the necessary native Windows DLLs to achieve full compatibility with games that the built-in Wine implementation cannot yet handle.
 
 This application provides a native macOS graphical interface for the mf-fix approach, making it easier to apply the fix without using Terminal commands.
+
+> **Note:** This is an unofficial tool. It is not affiliated with, endorsed by, or supported by CodeWeavers or Microsoft.
 
 ## Features
 
