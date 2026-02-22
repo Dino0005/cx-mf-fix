@@ -68,7 +68,7 @@ This application provides a native macOS graphical interface for the mf-fix appr
 
 1. Download the latest release from [Releases](../../releases)
 2. Move `CX mf-fix.app` to your Applications folder
-3. **First time only**: open the app, If you see the error "Impossibile aprire l'applicazione" (Unable to open the application), it's because macOS blocks unsigned apps.
+3. **First time only**: open the app, If you see the error "Unable to open the application", it's because macOS blocks unsigned apps.
 To fix this, open Terminal and run:
 
    ```bash
