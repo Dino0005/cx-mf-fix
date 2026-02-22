@@ -144,6 +144,10 @@ sudo xattr -r -d com.apple.quarantine "/Applications/CX mf-fix.app"
 - Assicurati che CrossOver sia installato in `/Applications/CrossOver.app`
 - Verifica di avere i permessi di scrittura sulla cartella della bottiglia
 
+### La Fix persisterà dopo un aggiornamento di CrossOver?
+
+Aggiornando CrossOver (es. da 25 a 25.1 o 26), la configurazione della bottiglia potrebbe essere resettata. Se i video smettono di funzionare dopo un aggiornamento di CrossOver, è sufficiente riapplicare il fix con questa applicazione.
+
 ## Dettagli Tecnici
 
 L'applicazione esegue i seguenti passaggi per abilitare il supporto Media Foundation:
