@@ -30,7 +30,7 @@ While CrossOver includes GStreamer support, it currently cannot decode all propr
 
 **CXPatcher:** Replaces older libraries in CrossOver with newer versions, including fixes for GStreamer and Media Foundation, so that games like the Resident Evil series can play cutscenes instead of freezing on a black screen.
 
-**cx-mf-fix (this project):** Installs the original Windows Media Foundation DLLs directly into the CrossOver "bottle". When the game tries to start a cutscene, it finds the libraries it expects (the DLLs) and the video plays. This solves freezes or black screens at game startup or during loading screens.
+**mf-fix:** Installs the original Windows Media Foundation DLLs directly into the CrossOver "bottle". When the game tries to start a cutscene, it finds the libraries it expects (the DLLs) and the video plays. This solves freezes or black screens at game startup or during loading screens.
 
 ### Why This Tool?
 
