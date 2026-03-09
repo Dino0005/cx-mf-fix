@@ -43,7 +43,7 @@ Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'appro
 
 ### Giochi Testati
 
-Vedi [**GAMES.md**](GAMES_IT.md) per una lista di giochi testati e confermati funzionanti con questa fix
+Vedi [**GAMES.md**](GAMES.md) per una lista di giochi testati e confermati funzionanti con questa fix
 
 ## Caratteristiche
 
