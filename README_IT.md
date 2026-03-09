@@ -41,6 +41,10 @@ Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'appro
 
 > **Nota:** Questo è uno strumento non ufficiale. Non è affiliato, approvato o supportato da CodeWeavers o Microsoft.
 
+### Giochi Testati
+
+Vedi [**GAMES.md**](GAMES_IT.md) per una lista di giochi testati e confermati funzionanti con questa fix
+
 ## Caratteristiche
 
 - 🎨 **Interfaccia nativa macOS** - Bella interfaccia SwiftUI con supporto drag & drop
