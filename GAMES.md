@@ -13,7 +13,7 @@ This page lists games that have been tested with CX MF-Fix.
 ## How to Contribute
 
 1. Test the game after applying the fix
-2. [Open an issue](../../issues/new) or [edit this file](../../edit/main/GAMES.md)
+2. [Open an issue](../../issues/new)
 3. Include:
    - Game name and version
    - CrossOver version
