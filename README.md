@@ -42,6 +42,10 @@ This application provides a native macOS graphical interface for the mf-fix appr
 
 > **Note:** This is an unofficial tool. It is not affiliated with, endorsed by, or supported by CodeWeavers or Microsoft.
 
+### Tested Games
+
+See [**GAMES.md**](GAMES.md) for a list of games tested and confirmed working with this fix.
+
 ## Features
 
 - 🎨 **Native macOS Interface** - Beautiful SwiftUI interface with drag & drop support
