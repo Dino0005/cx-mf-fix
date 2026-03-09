@@ -120,6 +120,10 @@ File richiesti dal progetto mf-fix:
 
 **Nota**: Il file `mf-dlls.zip` non è incluso nella cartella Resources del progetto. Tuttavia, è disponibile all'interno del pacchetto di rilascio precompilato nella sezione [Assets](../../releases/latest) per comodità (copiare`mf-dlls.zip` nella cartella CXMFFix).
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/files_project.png" width="40%">
+</p>
+
 ## Localizzazione
 
 L'app supporta più lingue:
