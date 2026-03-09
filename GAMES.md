@@ -27,5 +27,5 @@ This page lists games that have been tested with CX MF-Fix.
 | Cover | Game | Status | CrossOver Version | Notes |
 |-------|------|--------|-------------------|-------|
 | <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/544750/library_600x900.jpg" width="100"> | **SOULCALIBUR VI** | ✅ Working | 25.5+ | Intro and videos play perfectly. <br><br>Backend: D3DMetal<br>MSync: ON |
-| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2492040/library_600x900.jpg" width="100"> | **FATAL FURY: City of the Wolves** | ✅ Working | 25.5+ | Video intro and arcade mode works. <br><br>Backend: Auto<br>MSync: ON|
+| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2492040/library_600x900.jpg" width="100"> | **FATAL FURY: City of the Wolves** | ✅ Working | 25.5+ | Video intro and arcade mode works. <br><br>Backend: D3DMetal<br>MSync: ON|
 
