@@ -8,7 +8,7 @@ Command-line bash script to apply Media Foundation fixes to CrossOver bottles.
 
 This script automates the installation of Windows Media Foundation DLLs into CrossOver bottles, enabling video playback in games that require native Media Foundation support.
 
-**Prefer a graphical interface?** Use the [CX MF-Fix GUI app](../).
+**Prefer a graphical interface?** Use the [CX MF-Fix GUI app](https://github.com/Dino0005/cx-mf-fix).
 
 ## Requirements
 
@@ -27,7 +27,7 @@ The script requires these files in the same directory:
 - `mf.reg` - Registry file
 - `wmf.reg` - Registry file
 
-Download `mf-dlls.zip` from [Releases](../../releases) and extract it in the script directory.
+Download `mf-dlls.zip` from [Releases](https://github.com/Dino0005/cx-mf-fix/releases) and extract it in the script directory.
 
 ## Installation
 
@@ -129,4 +129,4 @@ This script is part of the CX MF-Fix project, licensed under MIT License.
 
 ---
 
-**Back to main project**: [CX MF-Fix](../)
+**Back to main project**: [CX MF-Fix](https://github.com/Dino0005/cx-mf-fix)
