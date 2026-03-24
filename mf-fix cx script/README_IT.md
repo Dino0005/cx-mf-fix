@@ -8,7 +8,7 @@ Script bash da riga di comando per applicare fix Media Foundation alle bottiglie
 
 Questo script automatizza l'installazione delle DLL Windows Media Foundation nelle bottiglie CrossOver, abilitando la riproduzione video nei giochi che richiedono il supporto nativo di Media Foundation.
 
-**Preferisci un'interfaccia grafica?** Usa l'[app GUI CX MF-Fix](../).
+**Preferisci un'interfaccia grafica?** Usa l'[app GUI CX MF-Fix](https://github.com/Dino0005/cx-mf-fix).
 
 ## Requisiti
 
