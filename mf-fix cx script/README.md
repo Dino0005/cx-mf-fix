@@ -129,4 +129,4 @@ This script is part of the CX MF-Fix project, licensed under MIT License.
 
 ---
 
-**Back to main project**: [CX MF-Fix](../../)
+**Back to main project**: [CX MF-Fix](../)
