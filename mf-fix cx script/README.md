@@ -27,7 +27,7 @@ The script requires these files in the same directory:
 - `mf.reg` - Registry file
 - `wmf.reg` - Registry file
 
-Download `mf-dlls.zip` from [Releases](../../releases) and extract it in the script directory.
+Download `mf-dlls.zip` from [Releases](../../releases/latest) and extract it in the script directory.
 
 ## Installation
 
