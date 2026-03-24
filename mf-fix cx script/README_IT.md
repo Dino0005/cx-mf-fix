@@ -27,7 +27,7 @@ Lo script richiede questi file nella stessa directory:
 - `mf.reg` - File di registro
 - `wmf.reg` - File di registro
 
-Scarica `mf-dlls.zip` dalle [Releases](../../releases) ed estrailo nella directory dello script.
+Scarica `mf-dlls.zip` dalle [Releases](https://github.com/Dino0005/cx-mf-fix/releases) ed estrailo nella directory dello script.
 
 ## Installazione
 
@@ -129,4 +129,4 @@ Questo script fa parte del progetto CX MF-Fix, sotto licenza MIT.
 
 ---
 
-**Torna al progetto principale**: [CX MF-Fix](../)
+**Torna al progetto principale**: [CX MF-Fix](https://github.com/Dino0005/cx-mf-fix)
