@@ -37,7 +37,7 @@ Come dichiarato dal [supporto CodeWeavers](https://www.codeweavers.com/support/f
 
 CX MF-Fix colma questa lacuna permettendo agli utenti di installare manualmente le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire. Oppure, in alternativa può aggiungere fisicamente i file binari di GStreamer dentro CrossOver.
 
-Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'approccio mf-fix, rendendo più semplice applicare la fix senza usare comandi da Terminale.
+Questa applicazione fornisce un'interfaccia grafica nativa per macOS rendendo più semplice applicare la fix senza usare comandi da Terminale.
 
 > **Nota:** Questo è uno strumento non ufficiale. Non è affiliato, approvato o supportato da CodeWeavers o Microsoft.
 
