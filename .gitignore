@@ -1,2 +1,9 @@
 # Xcode
+*.xcuserstate
 xcuserdata/
+*.xcuserdatad
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
