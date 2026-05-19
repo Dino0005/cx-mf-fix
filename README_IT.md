@@ -27,7 +27,7 @@ Sebbene CrossOver includa il supporto per GStreamer, attualmente non può decodi
 
 ### Soluzioni Disponibili
 
-**CXPatcher:** Sostituisce le vecchie librerie in CrossOver con versioni più recenti, inclusi i fix per GStreamer e Media Foundation, in modo che giochi come la serie Resident Evil possano riprodurre i filmati invece di bloccarsi su una schermata nera.
+**CXPatcher:** Sostituisce le vecchie librerie in CrossOver con versioni più recenti, inclusi i fix per GStreamer e Media Foundation, in modo che giochi come la serie Resident Evil possano riprodurre i filmati invece di bloccarsi su una schermata nera. CXPatcher non installa GStreamer, ma verifica se sul Mac è installata la versione ufficiale di GStreamer. Se è installato, neutralizza i file di GStreamer già presenti dentro CrossOver rinominandoli con il suffisso `_disabled`, nasconde quelle librerie a CrossOver per costringere l'app ad usare la versione esterna e più completa.
 
 **mf-fix:** Installa le DLL originali di Windows Media Foundation direttamente nella "bottiglia" CrossOver. Quando il gioco cerca di avviare un filmato, trova le librerie che si aspetta (le DLL) e il video parte. Questo risolve i blocchi o le schermate nere all'avvio del gioco o durante i caricamenti.
 
