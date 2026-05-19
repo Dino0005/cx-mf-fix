@@ -35,7 +35,7 @@ Sebbene CrossOver includa il supporto per GStreamer, attualmente non può decodi
 
 Come dichiarato dal [supporto CodeWeavers](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), sebbene Wine (e quindi CrossOver) abbia una propria implementazione di Media Foundation, è ancora in fase di sviluppo e non può ancora decodificare tutti i formati video proprietari utilizzati nei giochi AAA moderni. CodeWeavers non può supportare o distribuire le librerie native di Windows Media Foundation a causa delle restrizioni di licenza.
 
-CX MF-Fix colma questa lacuna permettendo agli utenti di installare manualmente le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire.
+CX MF-Fix colma questa lacuna permettendo agli utenti di installare manualmente le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire. Oppure, in alternativa può aggiungere fisicamente i file binari di GStreamer dentro CrossOver.
 
 Questa applicazione fornisce un'interfaccia grafica nativa per macOS per l'approccio mf-fix, rendendo più semplice applicare la fix senza usare comandi da Terminale.
 
