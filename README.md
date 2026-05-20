@@ -24,6 +24,7 @@ CrossOver uses libraries called `.dylib` (macOS binary format) to handle audio a
 
 ### GStreamer
 
+GStreamer is an open-source multimedia framework used by operating systems and applications to manage the reading, decoding, and playback of audio and video streams.
 While CrossOver includes GStreamer support, it currently cannot decode all proprietary video formats used in modern AAA games. This is due to codec licensing constraints and the ongoing development of the Media Foundation translation layer.
 
 ### Available Solutions
@@ -36,7 +37,10 @@ While CrossOver includes GStreamer support, it currently cannot decode all propr
 
 As stated by [CodeWeavers support](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), while Wine (and thus CrossOver) has its own implementation of Media Foundation, it is still a work in progress and cannot yet decode all proprietary video formats used in modern AAA games. CodeWeavers cannot support or distribute native Windows Media Foundation libraries due to licensing restrictions.
 
-CX MF-Fix bridges this gap by allowing users to manually install the necessary native Windows DLLs to achieve full compatibility with games that the built-in Wine implementation cannot yet handle. Or, alternatively, you can physically add GStreamer binary files into CrossOver.
+**CX MF-Fix** bridges this gap by allowing users to choose between two different methods: **mf-fix** or the **GStreamer patch**.
+
+- **mf-fix:** Manually installs the native Windows DLLs directly into the game's bottle. This provides full compatibility with games that Wine's built-in implementation cannot yet handle. (**Note**: This fix is applied to a single bottle)
+- **GStreamer patch:** Replaces the pre-installed GStreamer libraries inside CrossOver with a custom, comprehensive version containing all proprietary plugins and decoders (Good, Bad, and Ugly). This unlocks video and cutscene playback across your games. (**Note**: This patch modifies CrossOver's application files)
 
 This application provides a native macOS graphical interface for making it easier to apply the fix without using Terminal commands.
 
