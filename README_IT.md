@@ -23,6 +23,7 @@ CrossOver utilizza librerie chiamate `.dylib` (formato binario di macOS) per ges
 
 ### GStreamer
 
+GStreamer è un framework multimediale open-source, utilizzato dal sistema operativo e dalle applicazioni per gestire lettura, decodifica e riproduzione dei flussi audio e video.
 Sebbene CrossOver includa il supporto per GStreamer, attualmente non può decodificare tutti i formati video proprietari utilizzati nei giochi AAA moderni. Ciò è dovuto a vincoli di licenza dei codec e allo sviluppo continuo del livello di traduzione di Media Foundation.
 
 ### Soluzioni Disponibili
@@ -35,7 +36,10 @@ Sebbene CrossOver includa il supporto per GStreamer, attualmente non può decodi
 
 Come dichiarato dal [supporto CodeWeavers](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), sebbene Wine (e quindi CrossOver) abbia una propria implementazione di Media Foundation, è ancora in fase di sviluppo e non può ancora decodificare tutti i formati video proprietari utilizzati nei giochi AAA moderni. CodeWeavers non può supportare o distribuire le librerie native di Windows Media Foundation a causa delle restrizioni di licenza.
 
-CX MF-Fix colma questa lacuna permettendo agli utenti di installare manualmente le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire. Oppure, in alternativa può aggiungere fisicamente i file binari di GStreamer dentro CrossOver.
+CX MF-Fix colma questa lacuna permettendo agli utenti di scegliere tra **mf-fix** o **GStreamer patch**:
+- **mf-fix:** permette di installare manualmente nella bottiglia del gioco le DLL native di Windows necessarie per ottenere piena compatibilità con i giochi che l'implementazione integrata di Wine non può ancora gestire.(**Nota**: fix appliacta alla singola bottiglia)
+- **GStreamer patch:** permette di sostituire le librerie GStreamer preinstallate in CrossOver con una versione custom e completa di tutti i plugin e i decoder proprietari (Good, Bad e Ugly), sbloccando la riproduzione dei filmati e delle cutscene nei giochi. (**Nota**: la patch mofifica i file di CrossOver)
+
 
 Questa applicazione fornisce un'interfaccia grafica nativa per macOS rendendo più semplice applicare la fix senza usare comandi da Terminale.
 
