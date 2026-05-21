@@ -9,10 +9,6 @@
 
 Un'applicazione nativa per macOS per applicare fix Media Foundation alle bottiglie CrossOver.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix_it.png" width="70%">
-</p>
-
 ## Contesto
 
 ### Il Problema di Media Foundation
@@ -95,7 +91,12 @@ Per risolvere, apri il Terminale ed esegui:
 
 3. Compila ed esegui (⌘+R)
 
-## Utilizzo
+# Utilizzo
+
+## MF Fix
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix_it.png" width="70%">
+</p>
 
 1. Avvia l'app
 2. Trascina la cartella della bottiglia CrossOver nella zona di drop
@@ -107,7 +108,7 @@ Per risolvere, apri il Terminale ed esegui:
 6. Attendi il completamento
 7. Fatto! La tua bottiglia ora ha il supporto Media Foundation
 
-## Come Funziona
+### Come Funziona
 
 L'app esegue i seguenti passaggi:
 
