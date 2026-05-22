@@ -120,6 +120,8 @@ L'app esegue i seguenti passaggi:
 5. Importa le voci di registro necessarie
 6. Registra le DLL con il sistema
 
+##
+
 ### GStreamer patch
 
 1. Avvia l'app.
