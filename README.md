@@ -201,7 +201,7 @@ Updating CrossOver (e.g., from version 25 to 25.1 or 26) may reset the bottle co
 
 ## Technical Details
 
-The application performs the following steps to enable Media Foundation support:
+**MF-Fix** performs the following steps to enable Media Foundation support:
 
 1. **Extraction**: Unpacks the embedded `mf-dlls.zip` containing:
    - 64-bit DLLs for `system32/`
@@ -223,6 +223,16 @@ The application performs the following steps to enable Media Foundation support:
    - `msmpeg2vdec.dll` (MPEG-2 video decoder)
 
 This ensures that when a game makes Media Foundation API calls, the original Windows DLLs handle the requests, providing full codec support.
+
+**GStreamer patch** performs the following steps to upgrade CrossOver's multimedia framework:
+
+1. **Validation**: Verifies the integrity of the selected CrossOver application bundle, ensuring the internal `Contents/SharedSupport/CrossOver/lib64/` directory is present.
+2. **Temporary Extraction**: Extracts the embedded `gstreamer.zip` file (approx. 211 MB) into an isolated temporary subfolder generated inside `NSTemporaryDirectory()`.
+3. **Snapshot & Backup**: Scans the original CrossOver structure to create a text-based snapshot of existing files (`.dylib` files in both the root and plugins folders). It then creates a compressed backup archive (`Backup_GStreamer.zip`) inside `Application Support`, saving only the native files that are about to be overwritten.
+4. **Binary Update (lib64)**: Removes old binaries and copies the newly optimized main GStreamer `.dylib` libraries directly into the root of CrossOver's `lib64/` directory.
+5. **Plugin Injection (gstreamer-1.0)**: Ensures the `gstreamer-1.0/` folder exists within `lib64/` and injects the complete updated set of proprietary plugins and decoders (Good, Bad, and Ugly).
+
+This approach directly modifies CrossOver's global multimedia engine rather than a single bottle, unlocking upstream decoding for proprietary video and audio formats that Wine cannot yet translate natively.
 
 ## Legal Notice
 
