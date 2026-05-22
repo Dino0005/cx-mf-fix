@@ -246,10 +246,10 @@ The Media Foundation DLL files included in this project are extracted from **Win
 
 ### GStreamer Licensing
 
-The GStreamer patch included in this tool utilizes the **GStreamer** multimedia framework, which is distributed under the terms of the **GNU Lesser General Public License (LGPL) version 2.1**.
+The GStreamer patch included in this tool utilizes the **GStreamer** multimedia framework, which is distributed primarily under the terms of the **GNU Lesser General Public License (LGPL) version 2.1**.
 
-* **Compliance:** This project only distributes precompiled, unmodified GStreamer binary files, acting as a third-party installer/extractor. The original, unmodified source code for the framework is available on the official GStreamer project website.
-* **Modifiability:** In compliance with the LGPL license, users retain the right and technical ability to replace the provided libraries with custom or self-compiled versions.
+* **LGPL Compliance:** This project only distributes precompiled binary files extracted from the official GStreamer installer, acting as a third-party installer/extractor. In compliance with the LGPL license, users retain the right and technical ability to replace the provided libraries with custom or self-compiled versions. The original, unmodified source code for the framework is available on the official GStreamer project website.
+* **Patent Caution (Proprietary Codecs):** Certain included optional packages and plugins (such as those implementing multimedia standard formats like MPEG-2 video/audio, H.264, MP3, AC3, etc.) may be subject to software patent restrictions depending on the country where the software is used. This software is provided "as-is", without any warranty whatsoever. It is the sole responsibility of the end-user to ensure that their usage and distribution of these components comply with local patent laws and to obtain any required licenses from the respective patent holders.
 
 ### Third-Party Credits
 
