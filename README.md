@@ -97,6 +97,8 @@ To fix this, open Terminal and run:
 
 ## Usage
 
+### MF-Fix
+
 1. Launch the app
 2. Drag your CrossOver bottle folder into the drop zone
    - Or click to select it in Finder
@@ -107,7 +109,7 @@ To fix this, open Terminal and run:
 6. Wait for completion
 7. Done! Your bottle now has Media Foundation support
 
-## How It Works
+### How MF-Fix Works
 
 The app performs the following steps:
 
@@ -117,6 +119,30 @@ The app performs the following steps:
 4. Configures Wine DLL overrides
 5. Imports required registry entries
 6. Registers the DLLs with the system
+
+##
+
+### GStreamer patch
+
+1. Launch the app.
+2. Click "Select CrossOver" to choose the main CrossOver application.
+   - The panel will open directly in the `/Applications` folder for convenience.
+   - A quick check is performed automatically to ensure the selected CrossOver version is compatible.
+3. Click "Apply Patch".
+4. Confirm the informational dialog box.
+5. Wait for the process to finish while monitoring the real-time progress log.
+6. Done! CrossOver is now patched and ready to launch games with extended support for proprietary codecs.
+7. *(Optional)* In case of any issues, if a backup is available, you can click "Restore" at any time to revert CrossOver to its original state.
+
+### How GStreamer Patch Works
+
+The app performs the following steps:
+
+1. **Verification & Validation:** Checks for the required internal CrossOver directories (specifically `lib64`) to confirm compatibility.
+2. **Resource Extraction:** Extracts the embedded `gstreamer.zip` archive from the app bundle into a temporary macOS directory.
+3. **Snapshot & Automatic Backup:** Generates a snapshot list of the original CrossOver files and creates a compressed backup archive (`Backup_GStreamer.zip`) inside `Application Support`, saving only the files that are about to be overwritten.
+4. **Library Update:** Replaces and injects the newly optimized `.dylib` files directly into the `Contents/SharedSupport/CrossOver/lib64/` directory of the CrossOver application.
+5. **Plugin Installation:** Updates the internal `gstreamer-1.0` folder with the new proprietary decoders required to unlock audio and video playback in games.
 
 ## Building
 
