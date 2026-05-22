@@ -234,22 +234,30 @@ This ensures that when a game makes Media Foundation API calls, the original Win
 
 This approach directly modifies CrossOver's global multimedia engine rather than a single bottle, unlocking upstream decoding for proprietary video and audio formats that Wine cannot yet translate natively.
 
-## Legal Notice
+## Legal Notes
 
 ### Media Foundation Files
 
-The Media Foundation DLL files included in this project are extracted from **Windows 7 Service Pack 1 (KB976932)**, a public update freely distributed by Microsoft. These files are included solely for compatibility purposes with Wine/CrossOver environments.
+The Media Foundation DLL files included in this project are extracted from **Windows 7 Service Pack 1 (KB976932)**, a public update distributed freely by Microsoft. These files are included solely for compatibility purposes within Wine/CrossOver environments.
 
-**Source:** Windows 7 SP1 Platform Update (KB976932)  
-**Purpose:** Enable video playback compatibility in games running through CrossOver  
-**License Compliance:** Users are responsible for ensuring their use complies with Microsoft's licensing terms
+* **Source:** Windows 7 SP1 Platform Update (KB976932)  
+* **Purpose:** To enable video playback compatibility in games running via CrossOver  
+* **License Compliance:** Users are responsible for ensuring that their usage complies with Microsoft's licensing terms.
+
+### GStreamer Licensing
+
+The GStreamer patch included in this tool utilizes the **GStreamer** multimedia framework, which is distributed under the terms of the **GNU Lesser General Public License (LGPL) version 2.1**.
+
+* **Compliance:** This project only distributes precompiled, unmodified GStreamer binary files, acting as a third-party installer/extractor. The original, unmodified source code for the framework is available on the official GStreamer project website.
+* **Modifiability:** In compliance with the LGPL license, users retain the right and technical ability to replace the provided libraries with custom or self-compiled versions.
 
 ### Third-Party Credits
 
-- Original **mf-fix** Proton bash script concept by z0z0z
-- Windows Media Foundation libraries © Microsoft Corporation
+* Original Proton **mf-fix** bash script by z0z0z.
+* Windows Media Foundation libraries © Microsoft Corporation.
+* **GStreamer** multimedia framework (https://gstreamer.freedesktop.org) © GStreamer project contributors.
 
-**Disclaimer:** This is an unofficial tool and is not affiliated with, endorsed by, or supported by CodeWeavers or Microsoft. Use at your own risk. Always backup your CrossOver bottles before applying modifications.
+**Disclaimer:** This is an unofficial tool and is not affiliated with, authorized, endorsed, or supported by CodeWeavers or Microsoft. Use it at your own risk. Always back up your CrossOver bottles and application files before applying any modifications.
 
 
 ## License
