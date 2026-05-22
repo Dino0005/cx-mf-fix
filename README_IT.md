@@ -201,7 +201,7 @@ Aggiornando CrossOver (es. da 25 a 25.1 o 26), la configurazione della bottiglia
 
 ## Dettagli Tecnici
 
-L'applicazione esegue i seguenti passaggi per abilitare il supporto Media Foundation:
+**MF-Fix** esegue i seguenti passaggi per abilitare il supporto Media Foundation:
 
 1. **Estrazione**: Estrae il file `mf-dlls.zip` incorporato contenente:
    - DLL a 64-bit per `system32/`
@@ -223,6 +223,16 @@ L'applicazione esegue i seguenti passaggi per abilitare il supporto Media Founda
    - `msmpeg2vdec.dll` (decoder video MPEG-2)
 
 Questo assicura che quando un gioco effettua chiamate alle API di Media Foundation, le DLL originali di Windows gestiscano le richieste, fornendo supporto completo ai codec.
+
+La **GStreamer patch** esegue invece i seguenti passaggi per aggiornare il framework multimediale di CrossOver:
+
+1. **Validazione**: Verifica l'integrità del pacchetto dell'applicazione CrossOver selezionata, accertandosi della presenza della directory interna `Contents/SharedSupport/CrossOver/lib64/`.
+2. **Estrazione Temporanea**: Estrae il file `gstreamer.zip` (circa 211 MB) all'interno di una sottocartella temporanea e isolata generata in `NSTemporaryDirectory()`.
+3. **Snapshot & Backup**: Legge la struttura originale di CrossOver creando uno snapshot testuale dei file esistenti (`.dylib` nella root e nei plugin). Successivamente, genera un archivio di backup compresso (`Backup_GStreamer.zip`) in `Application Support` contenente esclusivamente i file nativi che verranno sovrascritti.
+4. **Aggiornamento Binari (lib64)**: Rimuove i vecchi binari e copia le nuove librerie `.dylib` principali di GStreamer ottimizzate direttamente nella root della cartella `lib64/` di CrossOver.
+5. **Iniezione Plugin (gstreamer-1.0)**: Assicura la presenza della cartella `gstreamer-1.0/` all'interno di `lib64/` e vi inietta l'intero set aggiornato di plugin e decoder proprietari (Good, Bad e Ugly).
+
+Questo approccio modifica direttamente il motore multimediale globale di CrossOver anziché la singola bottiglia, sbloccando a monte la decodifica dei formati video e audio proprietari che Wine non è ancora in grado di tradurre nativamente.
 
 ## Note Legali
 
