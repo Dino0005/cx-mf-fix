@@ -157,7 +157,7 @@ To correctly compile the project, ensure that you include the following required
 * **`mf.reg`**: A registry configuration file used to initialize core Media Foundation components.
 * **`wmf.reg`**: A registry configuration file specifically tailored for Windows Media Format overrides and codecs.
 
-**Note**: The `mf-dlls.zip` is not included in the Resources folder of the project. However, it is provided within the pre-compiled release package in the [Assets](../../releases/latest) section for your convenience (Copy `mf-dlls.zip` to the CXMFFix folder).
+**Note**: The `gstreamer.zip` and `mf-dlls.zip` files are not included directly within the project's `Resources` folder. However, for your convenience, they are available inside the precompiled release package under the [Assets](../../releases/latest) section (make sure to copy `gstreamer.zip` and `mf-dlls.zip` into CXMFFix the project's resources folder before building).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/files_project.png" width="40%">
