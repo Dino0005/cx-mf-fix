@@ -246,11 +246,10 @@ I file DLL di Media Foundation inclusi in questo progetto sono estratti da **Win
 
 ### Licenza GStreamer
 
-La patch GStreamer inclusa in questo strumento utilizza il framework multimediale **GStreamer**, distribuito sotto i termini della licenza **GNU Lesser General Public License (LGPL) versione 2.1**. 
+La patch GStreamer inclusa in questo strumento utilizza il framework multimediale **GStreamer**, distribuito principalmente sotto i termini della licenza **GNU Lesser General Public License (LGPL) versione 2.1**.
 
-* **Conformità:** Questo progetto distribuisce esclusivamente file binari precompilati e non modificati di GStreamer, agendo come un installer/estrattore di terze parti. Il codice sorgente originale e non modificato del framework è disponibile sul sito ufficiale del progetto GStreamer.
-* **Sostituibilità:** In conformità con la licenza LGPL, gli utenti mantengono il diritto e la possibilità tecnica di sostituire le librerie fornite con versioni personalizzate o compilate autonomamente.
-
+* **Conformità LGPL:** Questo progetto distribuisce esclusivamente file binari precompilati estratti dall'installer ufficiale di GStreamer, agendo come installer/estrattore di terze parti. In conformità con la licenza LGPL, gli utenti mantengono il diritto e la possibilità tecnica di sostituire le librerie fornite con versioni personalizzate o compilate autonomamente. Il codice sorgente originale e non modificato è disponibile sul sito ufficiale di GStreamer.
+* **Avviso sui Brevetti (Codec proprietari):** Alcuni pacchetti opzionali e plugin inclusi (come quelli per la decodifica di formati standard quali MPEG-2, H.264, MP3, AC3, ecc.) potrebbero essere soggetti a limitazioni sui brevetti software a seconda del Paese in cui il software viene utilizzato. Questo strumento fornisce le librerie "così come sono" (*as-is*). È responsabilità esclusiva dell'utente finale verificare se l'utilizzo di tali codec richieda licenze aggiuntive dai rispettivi detentori dei brevetti nel proprio Paese di residenza.
 ### Crediti di Terze Parti
 
 * Script bash originale **mf-fix** Proton di z0z0z.
