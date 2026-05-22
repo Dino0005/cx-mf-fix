@@ -240,16 +240,24 @@ Questo approccio modifica direttamente il motore multimediale globale di CrossOv
 
 I file DLL di Media Foundation inclusi in questo progetto sono estratti da **Windows 7 Service Pack 1 (KB976932)**, un aggiornamento pubblico distribuito gratuitamente da Microsoft. Questi file sono inclusi esclusivamente per scopi di compatibilità con ambienti Wine/CrossOver.
 
-**Fonte:** Windows 7 SP1 Platform Update (KB976932)  
-**Scopo:** Abilitare la compatibilità di riproduzione video nei giochi eseguiti tramite CrossOver  
-**Conformità alla Licenza:** Gli utenti sono responsabili di garantire che il loro utilizzo sia conforme ai termini di licenza di Microsoft
+* **Fonte:** Windows 7 SP1 Platform Update (KB976932)  
+* **Scopo:** Abilitare la compatibilità di riproduzione video nei giochi eseguiti tramite CrossOver  
+* **Conformità alla Licenza:** Gli utenti sono responsabili di garantire che il loro utilizzo sia conforme ai termini di licenza di Microsoft.
+
+### Licenza GStreamer
+
+La patch GStreamer inclusa in questo strumento utilizza il framework multimediale **GStreamer**, distribuito sotto i termini della licenza **GNU Lesser General Public License (LGPL) versione 2.1**. 
+
+* **Conformità:** Questo progetto distribuisce esclusivamente file binari precompilati e non modificati di GStreamer, agendo come un installer/estrattore di terze parti. Il codice sorgente originale e non modificato del framework è disponibile sul sito ufficiale del progetto GStreamer.
+* **Sostituibilità:** In conformità con la licenza LGPL, gli utenti mantengono il diritto e la possibilità tecnica di sostituire le librerie fornite con versioni personalizzate o compilate autonomamente.
 
 ### Crediti di Terze Parti
 
-- Script bash originale **mf-fix** Proton di z0z0z
-- Librerie Windows Media Foundation © Microsoft Corporation
+* Script bash originale **mf-fix** Proton di z0z0z.
+* Librerie Windows Media Foundation © Microsoft Corporation.
+* Framework multimediale **GStreamer** (https://gstreamer.freedesktop.org) © Contributori del progetto GStreamer.
 
-**Disclaimer:** Questo è uno strumento non ufficiale e non è affiliato, approvato o supportato da CodeWeavers o Microsoft. Usalo a tuo rischio. Effettua sempre il backup delle tue bottiglie CrossOver prima di applicare modifiche.
+**Disclaimer:** Questo è uno strumento non ufficiale e non è affiliato, approvato o supportato da CodeWeavers o Microsoft. Usalo a tuo rischio. Effettua sempre il backup delle tue bottiglie e dei file di CrossOver prima di applicare modifiche.
 
 ## Licenza
 
