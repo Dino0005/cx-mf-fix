@@ -144,14 +144,18 @@ L'app esegue i seguenti passaggi:
 4. **Aggiornamento delle Librerie:** Sostituisce e inserisce i nuovi file `.dylib` ottimizzati direttamente all'interno della directory `Contents/SharedSupport/CrossOver/lib64/` dell'applicazione CrossOver.
 5. **Installazione dei Plugin:** Aggiorna la cartella interna `gstreamer-1.0` con i nuovi decoder proprietari necessari per sbloccare la riproduzione di audio e video nei giochi.
 
-## Compilazione
+## Compilazione con Xcode
 
-Compilazione con Xcode
+Per compilare correttamente il progetto, assicurati di includere i seguenti file richiesti all'interno del bundle dell'applicazione:
 
-File richiesti dal progetto mf-fix:
-- `mf-dlls.zip` file .zip con le cartelle dei file DLL (`system32/` e `syswow64/`)
-- `mf.reg` file di registro
-- `wmf.reg` file di registro
+* **`gstreamer.zip`**: Archivio compresso (circa 211 MB) contenente la struttura custom e ottimizzata delle librerie multimediali. Al suo interno include:
+  * I file binari `.dylib` principali di GStreamer (es. `libgstreamer-1.0.dylib`, `libglib-2.0.dylib`, ecc.) destinati alla root di `lib64`.
+  * La cartella `gstreamer-1.0/` contenente l'intero set di plugin e decoder proprietari (Good, Bad e Ugly).
+* **`mf-dlls.zip`**: Archivio compresso contenente le cartelle con le DLL native di Windows, suddivise in:
+  * `system32/`: contenente i file DLL a 64-bit.
+  * `syswow64/`: contenente i file DLL a 32-bit.
+* **`mf.reg`**: File di configurazione del registro di sistema per l'inizializzazione dei componenti Media Foundation di base.
+* **`wmf.reg`**: File di configurazione del registro di sistema specifico per gli override e i codec Windows Media Format.
 
 **Nota**: Il file `mf-dlls.zip` non è incluso nella cartella Resources del progetto. Tuttavia, è disponibile all'interno del pacchetto di rilascio precompilato nella sezione [Assets](../../releases/latest) per comodità (copiare`mf-dlls.zip` nella cartella CXMFFix).
 
