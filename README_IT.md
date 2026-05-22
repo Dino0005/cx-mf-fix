@@ -95,9 +95,9 @@ Per risolvere, apri il Terminale ed esegui:
 
 3. Compila ed esegui (⌘+R)
 
-# Utilizzo
+## Utilizzo
 
-## MF Fix
+### MF Fix
 
 1. Avvia l'app
 2. Trascina la cartella della bottiglia CrossOver nella zona di drop
@@ -109,7 +109,7 @@ Per risolvere, apri il Terminale ed esegui:
 6. Attendi il completamento
 7. Fatto! La tua bottiglia ora ha il supporto Media Foundation
 
-### Come Funziona
+### Come Funziona MF Fix
 
 L'app esegue i seguenti passaggi:
 
@@ -119,6 +119,28 @@ L'app esegue i seguenti passaggi:
 4. Configura gli override delle DLL di Wine
 5. Importa le voci di registro necessarie
 6. Registra le DLL con il sistema
+
+### GStreamer patch
+
+1. Avvia l'app.
+2. Clicca su "Seleziona CrossOver" per scegliere l'applicazione CrossOver principale.
+   - L'app si aprirà direttamente nella cartella `/Applications` per facilitare la scelta.
+   - Verrà eseguita una verifica immediata per accertare che la versione di CrossOver sia compatibile.
+3. Clicca su "Applica Patch".
+4. Conferma la finestra di dialogo informativa.
+5. Attendi il completamento guardando il log di avanzamento in tempo reale.
+6. Fatto! CrossOver è ora patchato e pronto ad avviare i giochi con il supporto esteso ai codec proprietari.
+7. *(Opzionale)* In caso di problemi, se è presente un backup, puoi cliccare su "Ripristina" per riportare CrossOver allo stato originale in qualsiasi momento.
+
+### Come Funziona GStreamer patch
+
+L'app esegue i seguenti passaggi:
+
+1. **Verifica e Validazione:** Controlla la presenza delle cartelle interne di CrossOver (in particolare `lib64`) per confermare la compatibilità.
+2. **Estrazione delle risorse:** Estrae l'archivio `gstreamer.zip` incorporato nel bundle dell'app all'interno di una cartella temporanea di macOS.
+3. **Snapshot e Backup Automatico:** Crea una lista fotografica dei file originali di CrossOver e genera un archivio compresso di backup (`Backup_GStreamer.zip`) in `Application Support`, salvando esclusivamente i file che stanno per essere sovrascritti.
+4. **Aggiornamento delle Librerie:** Sostituisce e inserisce i nuovi file `.dylib` ottimizzati direttamente all'interno della directory `Contents/SharedSupport/CrossOver/lib64/` dell'applicazione CrossOver.
+5. **Installazione dei Plugin:** Aggiorna la cartella interna `gstreamer-1.0` con i nuovi decoder proprietari necessari per sbloccare la riproduzione di audio e video nei giochi.
 
 ## Compilazione
 
