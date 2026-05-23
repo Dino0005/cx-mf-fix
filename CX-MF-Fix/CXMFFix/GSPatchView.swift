@@ -11,6 +11,7 @@ struct GSPatchView: View {
     @State private var resultIsSuccess = false
     @State private var operationCompleted = false
     @State private var showingConfirm = false
+    @State private var showingBackupOverwriteConfirm = false
     @State private var pendingAction: GSAction = .patch
     @State private var backupExists = GSPatchProcessor.backupExists
 
@@ -65,6 +66,14 @@ struct GSPatchView: View {
             }
         } message: {
             Text(pendingAction == .patch ? L10n.gsConfirmPatch : L10n.gsConfirmRestore)
+        }
+        .alert(L10n.gsBackupOverwriteTitle, isPresented: $showingBackupOverwriteConfirm) {
+            Button(L10n.alertButtonCancel, role: .cancel) { }
+            Button(L10n.gsBackupOverwriteConfirm, role: .destructive) {
+                showingConfirm = true
+            }
+        } message: {
+            Text(L10n.gsBackupOverwriteMessage)
         }
         .alert(resultIsSuccess ? L10n.alertSuccessTitle : L10n.alertErrorTitle,
                isPresented: $showingResult) {
@@ -271,7 +280,13 @@ struct GSPatchView: View {
 
     private func confirm(_ action: GSAction) {
         pendingAction = action
-        showingConfirm = true
+        backupExists = GSPatchProcessor.backupExists
+        // Se stiamo applicando la patch e c'è già un backup, chiedi conferma sovrascrittura
+        if action == .patch && backupExists {
+            showingBackupOverwriteConfirm = true
+        } else {
+            showingConfirm = true
+        }
     }
 
     private func execute(action: GSAction) {
