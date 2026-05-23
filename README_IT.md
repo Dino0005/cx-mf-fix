@@ -73,8 +73,8 @@ Vedi [**GAMES.md**](GAMES.md) per una lista di giochi testati e confermati funzi
 - **CrossOver**: Installato in `/Applications/CrossOver.app`
 
 ### Per Sviluppatori (Compilazione da sorgente)
-- **Xcode**: 26.2+
-- **Swift**: 6.2+
+- **Xcode**: 26.5+
+- **Swift**: 6.3+
 - **Architettura**: Apple Silicon (arm64)
 
 ## Installazione
