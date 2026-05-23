@@ -71,39 +71,77 @@ class GSPatchProcessor {
         // Crea gstreamer-1.0 se non esiste
         try? fm.createDirectory(atPath: pluginPath, withIntermediateDirectories: true)
 
-        // lib*.dylib → lib64/
-        if let files = try? fm.contentsOfDirectory(atPath: zipRoot) {
-            let dylibs = files.filter { $0.hasPrefix("lib") && $0.hasSuffix(".dylib") }
-            for (i, fname) in dylibs.enumerated() {
-                let src = zipRoot + "/" + fname
-                let dst = lib64Path + "/" + fname
-                do {
-                    if fm.fileExists(atPath: dst) { try fm.removeItem(atPath: dst) }
-                    try fm.copyItem(atPath: src, toPath: dst)
-                    copied += 1
-                } catch {
-                    progressCallback?("⚠️ Errore su \(fname): \(error.localizedDescription)", 0.45 + Double(i) * 0.001)
-                    failed += 1
+        guard let rootItems = try? fm.contentsOfDirectory(atPath: zipRoot) else {
+            progressCallback?("❌ Impossibile leggere il contenuto dello zip", 0.5)
+            return false
+        }
+
+        // Separa cartelle, file reali e symlink
+        // I symlink vanno copiati per ultimi (puntano a file che devono già esistere)
+        var dirs: [String] = []
+        var realFiles: [String] = []
+        var symlinks: [String] = []
+
+        for item in rootItems {
+            let src = zipRoot + "/" + item
+            var isDir: ObjCBool = false
+            fm.fileExists(atPath: src, isDirectory: &isDir)
+
+            if isDir.boolValue {
+                dirs.append(item)
+            } else if item.hasSuffix(".dylib") {
+                // Distingui symlink da file reali
+                if let attrs = try? fm.attributesOfItem(atPath: src),
+                   let type_ = attrs[.type] as? FileAttributeType,
+                   type_ == .typeSymbolicLink {
+                    symlinks.append(item)
+                } else {
+                    realFiles.append(item)
                 }
             }
         }
 
-        progressCallback?("lib*.dylib copiati in lib64...", 0.7)
+        // 1. Cartelle
+        for item in dirs {
+            let src = zipRoot + "/" + item
+            let dst = lib64Path + "/" + item
+            do {
+                if fm.fileExists(atPath: dst) { try fm.removeItem(atPath: dst) }
+                try fm.copyItem(atPath: src, toPath: dst)
+                copied += 1
+            } catch {
+                progressCallback?("⚠️ Errore copia cartella \(item): \(error.localizedDescription)", 0.5)
+                failed += 1
+            }
+        }
 
-        // plugin → lib64/gstreamer-1.0/
-        if let files = try? fm.contentsOfDirectory(atPath: zipRoot + "/gstreamer-1.0") {
-            let plugins = files.filter { $0.hasSuffix(".dylib") }
-            for (i, fname) in plugins.enumerated() {
-                let src = zipRoot + "/gstreamer-1.0/" + fname
-                let dst = pluginPath + "/" + fname
-                do {
-                    if fm.fileExists(atPath: dst) { try fm.removeItem(atPath: dst) }
-                    try fm.copyItem(atPath: src, toPath: dst)
-                    copied += 1
-                } catch {
-                    progressCallback?("⚠️ Errore su \(fname): \(error.localizedDescription)", 0.7 + Double(i) * 0.001)
-                    failed += 1
-                }
+        // 2. File reali
+        for item in realFiles {
+            let src = zipRoot + "/" + item
+            let dst = lib64Path + "/" + item
+            do {
+                if fm.fileExists(atPath: dst) { try fm.removeItem(atPath: dst) }
+                try fm.copyItem(atPath: src, toPath: dst)
+                copied += 1
+            } catch {
+                progressCallback?("⚠️ Errore copia \(item): \(error.localizedDescription)", 0.5)
+                failed += 1
+            }
+        }
+
+        // 3. Symlink (per ultimi, così i file a cui puntano esistono già)
+        for item in symlinks {
+            let src = zipRoot + "/" + item
+            let dst = lib64Path + "/" + item
+            do {
+                if fm.fileExists(atPath: dst) { try fm.removeItem(atPath: dst) }
+                // Leggi destinazione del symlink e ricrealo
+                let linkDest = try fm.destinationOfSymbolicLink(atPath: src)
+                try fm.createSymbolicLink(atPath: dst, withDestinationPath: linkDest)
+                copied += 1
+            } catch {
+                progressCallback?("⚠️ Errore symlink \(item): \(error.localizedDescription)", 0.5)
+                failed += 1
             }
         }
 
@@ -158,12 +196,14 @@ class GSPatchProcessor {
         let snapshotRootSet = Set(snapshotRoot)
         let snapshotPluginsSet = Set(snapshotPlugins)
 
-        // Step 1: Elimina da lib64 root tutti i file NON presenti nello snapshot originale
+        // Step 1: Elimina da lib64 root tutti gli elementi NON presenti nello snapshot originale
         progressCallback?("Rimozione file aggiunti dalla patch in lib64...", 0.4)
-        if let currentFiles = try? fm.contentsOfDirectory(atPath: lib64Path) {
-            for fname in currentFiles where fname.hasSuffix(".dylib") {
-                if !snapshotRootSet.contains(fname) {
-                    let target = lib64Path + "/" + fname
+        if let currentItems = try? fm.contentsOfDirectory(atPath: lib64Path) {
+            for item in currentItems {
+                var isDir: ObjCBool = false
+                fm.fileExists(atPath: lib64Path + "/" + item, isDirectory: &isDir)
+                if (item.hasSuffix(".dylib") || isDir.boolValue) && !snapshotRootSet.contains(item) {
+                    let target = lib64Path + "/" + item
                     do {
                         try fm.removeItem(atPath: target)
                         deleted += 1
@@ -259,19 +299,29 @@ class GSPatchProcessor {
         var snapshotRoot = ""
         var snapshotPlugins = ""
 
-        // Backup lib64 root: copia i file che verranno sovrascritti, snapshot di tutti i dylib esistenti
-        if let files = try? fm.contentsOfDirectory(atPath: lib64Path) {
-            for fname in files where fname.hasSuffix(".dylib") {
-                snapshotRoot += fname + "\n"
+        // Snapshot di tutti gli elementi esistenti in lib64 root (file .dylib e cartelle)
+        if let items = try? fm.contentsOfDirectory(atPath: lib64Path) {
+            for item in items {
+                var isDir: ObjCBool = false
+                fm.fileExists(atPath: lib64Path + "/" + item, isDirectory: &isDir)
+                if item.hasSuffix(".dylib") || isDir.boolValue {
+                    snapshotRoot += item + "\n"
+                }
             }
         }
 
-        // Backup dei file che verranno sovrascritti dallo zip
-        if let files = try? fm.contentsOfDirectory(atPath: zipRoot) {
-            for fname in files where fname.hasPrefix("lib") && fname.hasSuffix(".dylib") {
-                let existing = lib64Path + "/" + fname
+        // Backup dei file/cartelle che verranno sovrascritti dallo zip
+        if let items = try? fm.contentsOfDirectory(atPath: zipRoot) {
+            for item in items {
+                let existing = lib64Path + "/" + item
+                var isDir: ObjCBool = false
+                fm.fileExists(atPath: existing, isDirectory: &isDir)
                 if fm.fileExists(atPath: existing) {
-                    try? fm.copyItem(atPath: existing, toPath: backupTmp + "/overwritten/lib64_root/" + fname)
+                    if isDir.boolValue {
+                        try? fm.copyItem(atPath: existing, toPath: backupTmp + "/overwritten/lib64_root/" + item)
+                    } else if item.hasSuffix(".dylib") {
+                        try? fm.copyItem(atPath: existing, toPath: backupTmp + "/overwritten/lib64_root/" + item)
+                    }
                 }
             }
         }
