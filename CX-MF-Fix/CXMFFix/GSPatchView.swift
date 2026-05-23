@@ -11,7 +11,6 @@ struct GSPatchView: View {
     @State private var resultIsSuccess = false
     @State private var operationCompleted = false
     @State private var showingConfirm = false
-    @State private var showingBackupOverwriteConfirm = false
     @State private var pendingAction: GSAction = .patch
     @State private var backupExists = GSPatchProcessor.backupExists
 
@@ -66,14 +65,6 @@ struct GSPatchView: View {
             }
         } message: {
             Text(pendingAction == .patch ? L10n.gsConfirmPatch : L10n.gsConfirmRestore)
-        }
-        .alert(L10n.gsBackupOverwriteTitle, isPresented: $showingBackupOverwriteConfirm) {
-            Button(L10n.alertButtonCancel, role: .cancel) { }
-            Button(L10n.gsBackupOverwriteConfirm, role: .destructive) {
-                showingConfirm = true
-            }
-        } message: {
-            Text(L10n.gsBackupOverwriteMessage)
         }
         .alert(resultIsSuccess ? L10n.alertSuccessTitle : L10n.alertErrorTitle,
                isPresented: $showingResult) {
@@ -199,8 +190,23 @@ struct GSPatchView: View {
                     .cornerRadius(10)
                 }
                 .buttonStyle(PlainButtonStyle())
+            } else if backupExists {
+                // Backup presente = patch già applicata → solo Ripristina
+                Button(action: { confirm(.restore) }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "arrow.uturn.backward.circle")
+                        Text(L10n.gsRestoreButton)
+                    }
+                    .font(.system(size: 15, weight: .semibold))
+                    .frame(width: 200, height: 44)
+                    .background(cxAppURL != nil ? Color.orange.opacity(0.85) : Color.gray.opacity(0.4))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .disabled(cxAppURL == nil)
             } else {
-                // Apply Patch — solo se CrossOver selezionato
+                // Nessun backup = patch non applicata → solo Applica Patch
                 Button(action: { confirm(.patch) }) {
                     HStack(spacing: 8) {
                         Image(systemName: "square.and.arrow.down.on.square")
@@ -214,23 +220,6 @@ struct GSPatchView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .disabled(cxAppURL == nil)
-
-                // Restore — solo se backup disponibile e CrossOver selezionato
-                if backupExists {
-                    Button(action: { confirm(.restore) }) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "arrow.uturn.backward.circle")
-                            Text(L10n.gsRestoreButton)
-                        }
-                        .font(.system(size: 15, weight: .semibold))
-                        .frame(width: 200, height: 44)
-                        .background(cxAppURL != nil ? Color.orange.opacity(0.85) : Color.gray.opacity(0.4))
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .disabled(cxAppURL == nil)
-                }
             }
         }
         .padding(.bottom, 40)
@@ -280,13 +269,7 @@ struct GSPatchView: View {
 
     private func confirm(_ action: GSAction) {
         pendingAction = action
-        backupExists = GSPatchProcessor.backupExists
-        // Se stiamo applicando la patch e c'è già un backup, chiedi conferma sovrascrittura
-        if action == .patch && backupExists {
-            showingBackupOverwriteConfirm = true
-        } else {
-            showingConfirm = true
-        }
+        showingConfirm = true
     }
 
     private func execute(action: GSAction) {
@@ -317,6 +300,9 @@ struct GSPatchView: View {
 
             DispatchQueue.main.async {
                 isProcessing = false
+                if success && action == .restore {
+                    _ = GSPatchProcessor.trashBackup()
+                }
                 backupExists = GSPatchProcessor.backupExists
                 resultIsSuccess = success
                 resultMessage = success
