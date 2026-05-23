@@ -162,7 +162,7 @@ The app performs the following steps:
 
 To correctly compile the project, ensure that you include the following required files within the application bundle:
 
-* **`gstreamer.zip`**: A compressed archive (approx. 211 MB) containing the custom, optimized multimedia library structure. Inside, it includes:
+* **`gstreamer.zip`**: A compressed archive containing the custom, optimized multimedia library structure. Inside, it includes:
   * The main GStreamer `.dylib` binary files (e.g., `libgstreamer-1.0.dylib`, `libglib-2.0.dylib`, etc.) targetec for the `lib64` root directory.
   * The `gstreamer-1.0/` subfolder containing the complete set of proprietary plugins and decoders (Good, Bad, and Ugly).
 * **`mf-dlls.zip`**: A compressed archive containing the native Windows DLL directories, structured as follows:
