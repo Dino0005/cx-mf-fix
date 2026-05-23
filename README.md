@@ -72,8 +72,8 @@ See [**GAMES.md**](GAMES.md) for a list of games tested and confirmed working wi
 - **CrossOver**: Installed in `/Applications/CrossOver.app`
 
 ### For Developers (Building from source)
-- **Xcode**: 26.2+
-- **Swift**: 6.2+
+- **Xcode**: 26.5+
+- **Swift**: 6.3+
 - **Architecture**: Apple Silicon (arm64)
 
 ## Installation
