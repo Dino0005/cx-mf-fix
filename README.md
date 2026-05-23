@@ -9,10 +9,16 @@
 
 A native macOS application to apply Media Foundation fixes to CrossOver bottles.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix.png" width="70%">
-</p>
-
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot%20CX%20mf-fix.png" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot%20CX%20GS.png" width="100%">
+    </td>
+  </tr>
+</table>
 
 ## Background
 
@@ -99,6 +105,10 @@ To fix this, open Terminal and run:
 
 ### MF-Fix
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix.png" width="70%">
+</p>
+
 1. Launch the app
 2. Drag your CrossOver bottle folder into the drop zone
    - Or click to select it in Finder
@@ -123,6 +133,10 @@ The app performs the following steps:
 ##
 
 ### GStreamer patch
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX GS.png" width="70%">
+</p>
 
 1. Launch the app.
 2. Click "Select CrossOver" to choose the main CrossOver application.
