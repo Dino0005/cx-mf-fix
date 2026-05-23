@@ -9,9 +9,16 @@
 
 Un'applicazione nativa per macOS per applicare fix Media Foundation alle bottiglie CrossOver.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix_it.png" width="70%">
-</p>
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot%20CX%20mf-fix_it.png" width="100%">
+    </td>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot%20CX%20GS_it.png" width="100%">
+    </td>
+  </tr>
+</table>
 
 ## Contesto
 
@@ -99,6 +106,10 @@ Per risolvere, apri il Terminale ed esegui:
 
 ### MF Fix
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix_it.png" width="70%">
+</p>
+
 1. Avvia l'app
 2. Trascina la cartella della bottiglia CrossOver nella zona di drop
    - Oppure clicca per selezionarla nel Finder
@@ -123,6 +134,10 @@ L'app esegue i seguenti passaggi:
 ##
 
 ### GStreamer patch
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX GS_it.png" width="70%">
+</p>
 
 1. Avvia l'app.
 2. Clicca su "Seleziona CrossOver" per scegliere l'applicazione CrossOver principale.
