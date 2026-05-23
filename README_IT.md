@@ -140,7 +140,7 @@ L'app esegue i seguenti passaggi:
 
 1. **Verifica e Validazione:** Controlla la presenza delle cartelle interne di CrossOver (in particolare `lib64`) per confermare la compatibilità.
 2. **Estrazione delle risorse:** Estrae l'archivio `gstreamer.zip` incorporato nel bundle dell'app all'interno di una cartella temporanea di macOS.
-3. **Snapshot e Backup Automatico:** Crea una lista fotografica dei file originali di CrossOver e genera un archivio compresso di backup (`Backup_GStreamer.zip`) in `Application Support`, salvando esclusivamente i file che stanno per essere sovrascritti.
+3. **Snapshot e Backup Automatico:** Crea una lista fotografica dei file originali di CrossOver e genera un archivio compresso di backup (`Backup_GStreamer.zip`) in `~/Library/Application Support/CXMFFix/`, salvando esclusivamente i file che stanno per essere sovrascritti.
 4. **Aggiornamento delle Librerie:** Sostituisce e inserisce i nuovi file `.dylib` ottimizzati direttamente all'interno della directory `Contents/SharedSupport/CrossOver/lib64/` dell'applicazione CrossOver.
 5. **Installazione dei Plugin:** Aggiorna la cartella interna `gstreamer-1.0` con i nuovi decoder proprietari necessari per sbloccare la riproduzione di audio e video nei giochi.
 
