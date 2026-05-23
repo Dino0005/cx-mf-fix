@@ -1,8 +1,8 @@
 # CX MF-Fix
 
 ![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
-![Swift: 6.2](https://img.shields.io/badge/Swift-6.2-orange)
-![Xcode: 26.2](https://img.shields.io/badge/Xcode-26.2-blue)
+![Swift: 6.3.2](https://img.shields.io/badge/Swift-6.2-orange)
+![Xcode: 26.5](https://img.shields.io/badge/Xcode-26.2-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 **English** | **[Italiano](README_IT.md)**
