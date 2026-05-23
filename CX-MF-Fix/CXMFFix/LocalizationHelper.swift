@@ -102,7 +102,4 @@ enum L10n {
     static let gsSelectCxMessage = String(localized: "gs.select.cx.message")
     static let gsSelectCxPrompt = String(localized: "gs.select.cx.prompt")
     static let gsInvalidCxApp = String(localized: "gs.invalid.cx.app")
-    static let gsBackupOverwriteTitle = String(localized: "gs.backup.overwrite.title")
-    static let gsBackupOverwriteMessage = String(localized: "gs.backup.overwrite.message")
-    static let gsBackupOverwriteConfirm = String(localized: "gs.backup.overwrite.confirm")
 }
