@@ -1088,6 +1088,57 @@
           }
         }
       }
+    },
+    "gs.backup.overwrite.confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overwrite"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sovrascrivi"
+          }
+        }
+      }
+    },
+    "gs.backup.overwrite.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A backup already exists. Overwrite it with a new one?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esiste già un backup. Sovrascriverlo con uno nuovo?"
+          }
+        }
+      }
+    },
+    "gs.backup.overwrite.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Existing Backup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Backup esistente"
+          }
+        }
+      }
     }
   },
   "version" : "1.1"
