@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-05-23
+
+### Added
+- GStreamer Patch tab: apply and restore GStreamer libraries directly to CrossOver.app
+- Tab bar navigation to switch between MF Fix and GStreamer Patch
+- NSOpenPanel-based CrossOver.app selector (grants write access without disabling SIP)
+- Smart backup system: snapshot of original lib64 state before patching
+- Automatic backup restore: overwrites modified files and removes added ones
+- Backup moved to Trash after successful restore, ready for a fresh patch
+- Support for subdirectories in GStreamer zip
+- Correct symlink handling during copy (real files copied first, symlinks recreated last)
+- Backup stored in ~/Library/Application Support/CXMFFix/Backup_GStreamer.zip
+
+### Changed
+- Patch/Restore buttons are mutually exclusive based on backup state: Apply Patch shown when no backup exists, Restore shown when backup is present
+- Tab bar replaces single-view layout
+
+### Fixed
+- libffi.dylib copy failure caused by symlink resolution order
+
 ## [1.0.0] - 2026-02-21
 
 ### Added
