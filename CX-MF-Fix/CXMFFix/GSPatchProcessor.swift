@@ -271,6 +271,17 @@ class GSPatchProcessor {
 
     // MARK: - Private helpers
 
+    static func trashBackup() -> Bool {
+        guard backupExists else { return true }
+        do {
+            try FileManager.default.trashItem(at: backupURL, resultingItemURL: nil)
+            return true
+        } catch {
+            print("Errore spostamento backup nel cestino: \(error)")
+            return false
+        }
+    }
+
     private static func findZipRoot(in tmpDir: String) -> String? {
         if FileManager.default.fileExists(atPath: tmpDir + "/gstreamer-1.0") {
             return tmpDir
