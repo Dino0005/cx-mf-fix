@@ -1,26 +1,25 @@
 import Foundation
 
-// Helper per accedere alle stringhe localizzate in modo type-safe
 enum L10n {
     // App
     static let appTitle = String(localized: "app.title")
-    
+
     // Drop zone
     static let dropTitle = String(localized: "drop.title")
     static let dropSubtitle = String(localized: "drop.subtitle")
-    
+
     // Buttons
     static let buttonApplyFix = String(localized: "button.applyFix")
     static let buttonNewFix = String(localized: "button.newFix")
     static let buttonSaveLog = String(localized: "button.saveLog")
-    
+
     // Status
     static let statusApplyingFix = String(localized: "status.applyingFix")
-    
+
     // Log
     static let logProgress = String(localized: "log.progress")
     static let logFixLog = String(localized: "log.fixLog")
-    
+
     // Alert
     static let alertWarningTitle = String(localized: "alert.warning.title")
     static let alertWarningMessage = String(localized: "alert.warning.message")
@@ -31,18 +30,18 @@ enum L10n {
     static let alertErrorTitle = String(localized: "alert.error.title")
     static let alertSuccessMessage = String(localized: "alert.success.message")
     static let alertErrorMessage = String(localized: "alert.error.message")
-    
+
     // Errors
     static let errorInvalidBottle = String(localized: "error.invalidBottle")
     static func errorSelectFolder(_ error: String) -> String {
         String(localized: "error.selectFolder", defaultValue: "Failed to select folder: \(error)")
     }
-    
-    // Picker
+
+    // Picker / Save
     static let pickerTitle = String(localized: "picker.title")
     static let saveTitle = String(localized: "save.title")
-    
-    // Process messages
+
+    // Process messages MF Fix
     static func processStarting(_ bottle: String) -> String {
         String(localized: "process.starting", defaultValue: "Starting fix for bottle: \(bottle)")
     }
@@ -71,7 +70,7 @@ enum L10n {
     static func processCopiedWithPrivileges(_ file: String) -> String {
         String(localized: "process.copiedWithPrivileges", defaultValue: "✓ Copied \(file) with elevated privileges")
     }
-    
+
     // Errors with parameters
     static let errorResourcesNotFound = String(localized: "error.resourcesNotFound")
     static let errorExtractFailed = String(localized: "error.extractFailed")
@@ -85,4 +84,22 @@ enum L10n {
     static func warningRegisterFailed(_ dll: String) -> String {
         String(localized: "warning.registerFailed", defaultValue: "⚠️  Warning: Failed to register \(dll)")
     }
+
+    // ── GStreamer Patch ───────────────────────────────────────
+    static let gsTitle = String(localized: "gs.title")
+    static let gsSubtitle = String(localized: "gs.subtitle")
+    static let gsPatchButton = String(localized: "gs.button.patch")
+    static let gsRestoreButton = String(localized: "gs.button.restore")
+    static let gsConfirmPatch = String(localized: "gs.confirm.patch")
+    static let gsConfirmRestore = String(localized: "gs.confirm.restore")
+    static let gsBackupAvailable = String(localized: "gs.backup.available")
+    static let gsSuccessPatch = String(localized: "gs.success.patch")
+    static let gsSuccessRestore = String(localized: "gs.success.restore")
+    static let gsNoCxSelected = String(localized: "gs.no.cx.selected")
+    static let gsSelectCxHint = String(localized: "gs.select.cx.hint")
+    static let gsSelectCx = String(localized: "gs.select.cx")
+    static let gsChangeCx = String(localized: "gs.change.cx")
+    static let gsSelectCxMessage = String(localized: "gs.select.cx.message")
+    static let gsSelectCxPrompt = String(localized: "gs.select.cx.prompt")
+    static let gsInvalidCxApp = String(localized: "gs.invalid.cx.app")
 }

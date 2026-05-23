@@ -24,11 +24,12 @@ CrossOver uses libraries called `.dylib` (macOS binary format) to handle audio a
 
 ### GStreamer
 
+GStreamer is an open-source multimedia framework used by operating systems and applications to manage the reading, decoding, and playback of audio and video streams.
 While CrossOver includes GStreamer support, it currently cannot decode all proprietary video formats used in modern AAA games. This is due to codec licensing constraints and the ongoing development of the Media Foundation translation layer.
 
 ### Available Solutions
 
-**CXPatcher:** Replaces older libraries in CrossOver with newer versions, including fixes for GStreamer and Media Foundation, so that games like the Resident Evil series can play cutscenes instead of freezing on a black screen.
+**CXPatcher:** Replaces older libraries in CrossOver with newer versions, including fixes for GStreamer and Media Foundation, so that games like the Resident Evil series can play cutscenes instead of freezing on a black screen. CXPatcher does not install GStreamer itself, but verifies whether the official GStreamer version is installed on the Mac. If detected, it neutralizes the existing GStreamer files within CrossOver by renaming them with the `_disabled` suffix, hiding these libraries from CrossOver to force the application to use the external, more complete version
 
 **mf-fix:** Installs the original Windows Media Foundation DLLs directly into the CrossOver "bottle". When the game tries to start a cutscene, it finds the libraries it expects (the DLLs) and the video plays. This solves freezes or black screens at game startup or during loading screens.
 
@@ -36,9 +37,12 @@ While CrossOver includes GStreamer support, it currently cannot decode all propr
 
 As stated by [CodeWeavers support](https://www.codeweavers.com/support/forums/general/?t=27;msg=260263), while Wine (and thus CrossOver) has its own implementation of Media Foundation, it is still a work in progress and cannot yet decode all proprietary video formats used in modern AAA games. CodeWeavers cannot support or distribute native Windows Media Foundation libraries due to licensing restrictions.
 
-CX MF-Fix bridges this gap by allowing users to manually install the necessary native Windows DLLs to achieve full compatibility with games that the built-in Wine implementation cannot yet handle.
+**CX MF-Fix** bridges this gap by allowing users to choose between two different methods: **mf-fix** or the **GStreamer patch**.
 
-This application provides a native macOS graphical interface for the mf-fix approach, making it easier to apply the fix without using Terminal commands.
+- **mf-fix:** Manually installs the native Windows DLLs directly into the game's bottle. This provides full compatibility with games that Wine's built-in implementation cannot yet handle. (**Note**: This fix is applied to a single bottle)
+- **GStreamer patch:** Replaces the pre-installed GStreamer libraries inside CrossOver with a custom, comprehensive version containing all proprietary plugins and decoders (Good, Bad, and Ugly). This unlocks video and cutscene playback across your games. (**Note**: This patch modifies CrossOver's application files)
+
+This application provides a native macOS graphical interface for making it easier to apply the fix without using Terminal commands.
 
 > **Note:** This is an unofficial tool. It is not affiliated with, endorsed by, or supported by CodeWeavers or Microsoft.
 
@@ -93,6 +97,8 @@ To fix this, open Terminal and run:
 
 ## Usage
 
+### MF-Fix
+
 1. Launch the app
 2. Drag your CrossOver bottle folder into the drop zone
    - Or click to select it in Finder
@@ -103,7 +109,7 @@ To fix this, open Terminal and run:
 6. Wait for completion
 7. Done! Your bottle now has Media Foundation support
 
-## How It Works
+### How MF-Fix Works
 
 The app performs the following steps:
 
@@ -114,16 +120,44 @@ The app performs the following steps:
 5. Imports required registry entries
 6. Registers the DLLs with the system
 
-## Building
+##
 
-Building with Xcode
+### GStreamer patch
 
-Required files from mf-fix project:
-- `mf-dlls.zip` .zip file with DLL file folders (`system32/` and `syswow64/`)
-- `mf.reg` registry file
-- `wmf.reg` registry file
+1. Launch the app.
+2. Click "Select CrossOver" to choose the main CrossOver application.
+   - The panel will open directly in the `/Applications` folder for convenience.
+   - A quick check is performed automatically to ensure the selected CrossOver version is compatible.
+3. Click "Apply Patch".
+4. Confirm the informational dialog box.
+5. Wait for the process to finish while monitoring the real-time progress log.
+6. Done! CrossOver is now patched and ready to launch games with extended support for proprietary codecs.
+7. *(Optional)* In case of any issues, if a backup is available, you can click "Restore" at any time to revert CrossOver to its original state.
 
-**Note**: The `mf-dlls.zip` is not included in the Resources folder of the project. However, it is provided within the pre-compiled release package in the [Assets](../../releases/latest) section for your convenience (Copy `mf-dlls.zip` to the CXMFFix folder).
+### How GStreamer Patch Works
+
+The app performs the following steps:
+
+1. **Verification & Validation:** Checks for the required internal CrossOver directories (specifically `lib64`) to confirm compatibility.
+2. **Resource Extraction:** Extracts the embedded `gstreamer.zip` archive from the app bundle into a temporary macOS directory.
+3. **Snapshot & Automatic Backup:** Generates a snapshot list of the original CrossOver files and creates a compressed backup archive (`Backup_GStreamer.zip`) inside `~/Library/Application Support/CXMFFix/`, saving only the files that are about to be overwritten.
+4. **Library Update:** Replaces and injects the newly optimized `.dylib` files directly into the `Contents/SharedSupport/CrossOver/lib64/` directory of the CrossOver application.
+5. **Plugin Installation:** Updates the internal `gstreamer-1.0` folder with the new proprietary decoders required to unlock audio and video playback in games.
+
+## Building with Xcode
+
+To correctly compile the project, ensure that you include the following required files within the application bundle:
+
+* **`gstreamer.zip`**: A compressed archive (approx. 211 MB) containing the custom, optimized multimedia library structure. Inside, it includes:
+  * The main GStreamer `.dylib` binary files (e.g., `libgstreamer-1.0.dylib`, `libglib-2.0.dylib`, etc.) targetec for the `lib64` root directory.
+  * The `gstreamer-1.0/` subfolder containing the complete set of proprietary plugins and decoders (Good, Bad, and Ugly).
+* **`mf-dlls.zip`**: A compressed archive containing the native Windows DLL directories, structured as follows:
+  * `system32/`: containing the 64-bit DLL files.
+  * `syswow64/`: containing the 32-bit DLL files.
+* **`mf.reg`**: A registry configuration file used to initialize core Media Foundation components.
+* **`wmf.reg`**: A registry configuration file specifically tailored for Windows Media Format overrides and codecs.
+
+**Note**: The `gstreamer.zip` and `mf-dlls.zip` files are not included directly within the project's resources folder. However, for your convenience, they are available inside the precompiled release package under the [Assets](../../releases/latest) section (remember to copy `gstreamer.zip` and `mf-dlls.zip` into the `CXMFFix` project resources folder before starting the compilation).
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/files_project.png" width="40%">
@@ -167,7 +201,7 @@ Updating CrossOver (e.g., from version 25 to 25.1 or 26) may reset the bottle co
 
 ## Technical Details
 
-The application performs the following steps to enable Media Foundation support:
+**MF-Fix** performs the following steps to enable Media Foundation support:
 
 1. **Extraction**: Unpacks the embedded `mf-dlls.zip` containing:
    - 64-bit DLLs for `system32/`
@@ -190,22 +224,40 @@ The application performs the following steps to enable Media Foundation support:
 
 This ensures that when a game makes Media Foundation API calls, the original Windows DLLs handle the requests, providing full codec support.
 
-## Legal Notice
+**GStreamer patch** performs the following steps to upgrade CrossOver's multimedia framework:
+
+1. **Validation**: Verifies the integrity of the selected CrossOver application bundle, ensuring the internal `Contents/SharedSupport/CrossOver/lib64/` directory is present.
+2. **Temporary Extraction**: Extracts the embedded `gstreamer.zip` file (approx. 211 MB) into an isolated temporary subfolder generated inside `NSTemporaryDirectory()`.
+3. **Snapshot & Backup**: Scans the original CrossOver structure to create a text-based snapshot of existing files (`.dylib` files in both the root and plugins folders). It then creates a compressed backup archive (`Backup_GStreamer.zip`) inside `Application Support`, saving only the native files that are about to be overwritten.
+4. **Binary Update (lib64)**: Removes old binaries and copies the newly optimized main GStreamer `.dylib` libraries directly into the root of CrossOver's `lib64/` directory.
+5. **Plugin Injection (gstreamer-1.0)**: Ensures the `gstreamer-1.0/` folder exists within `lib64/` and injects the complete updated set of proprietary plugins and decoders (Good, Bad, and Ugly).
+
+This approach directly modifies CrossOver's global multimedia engine rather than a single bottle, unlocking upstream decoding for proprietary video and audio formats that Wine cannot yet translate natively.
+
+## Legal Notes
 
 ### Media Foundation Files
 
-The Media Foundation DLL files included in this project are extracted from **Windows 7 Service Pack 1 (KB976932)**, a public update freely distributed by Microsoft. These files are included solely for compatibility purposes with Wine/CrossOver environments.
+The Media Foundation DLL files included in this project are extracted from **Windows 7 Service Pack 1 (KB976932)**, a public update distributed freely by Microsoft. These files are included solely for compatibility purposes within Wine/CrossOver environments.
 
-**Source:** Windows 7 SP1 Platform Update (KB976932)  
-**Purpose:** Enable video playback compatibility in games running through CrossOver  
-**License Compliance:** Users are responsible for ensuring their use complies with Microsoft's licensing terms
+* **Source:** Windows 7 SP1 Platform Update (KB976932)  
+* **Purpose:** To enable video playback compatibility in games running via CrossOver  
+* **License Compliance:** Users are responsible for ensuring that their usage complies with Microsoft's licensing terms.
+
+### GStreamer Licensing
+
+The GStreamer patch included in this tool utilizes the **GStreamer** multimedia framework, which is distributed primarily under the terms of the **GNU Lesser General Public License (LGPL) version 2.1**.
+
+* **LGPL Compliance:** This project only distributes precompiled binary files extracted from the official GStreamer installer, acting as a third-party installer/extractor. In compliance with the LGPL license, users retain the right and technical ability to replace the provided libraries with custom or self-compiled versions. The original, unmodified source code for the framework is available on the official GStreamer project website.
+* **Patent Caution (Proprietary Codecs):** Certain included optional packages and plugins (such as those implementing multimedia standard formats like MPEG-2 video/audio, H.264, MP3, AC3, etc.) may be subject to software patent restrictions depending on the country where the software is used. This software is provided "as-is", without any warranty whatsoever. It is the sole responsibility of the end-user to ensure that their usage and distribution of these components comply with local patent laws and to obtain any required licenses from the respective patent holders.
 
 ### Third-Party Credits
 
-- Original **mf-fix** Proton bash script concept by z0z0z
-- Windows Media Foundation libraries © Microsoft Corporation
+* Original Proton **mf-fix** bash script by z0z0z.
+* Windows Media Foundation libraries © Microsoft Corporation.
+* **GStreamer** multimedia framework (https://gstreamer.freedesktop.org) © GStreamer project contributors.
 
-**Disclaimer:** This is an unofficial tool and is not affiliated with, endorsed by, or supported by CodeWeavers or Microsoft. Use at your own risk. Always backup your CrossOver bottles before applying modifications.
+**Disclaimer:** This is an unofficial tool and is not affiliated with, authorized, endorsed, or supported by CodeWeavers or Microsoft. Use it at your own risk. Always back up your CrossOver bottles and application files before applying any modifications.
 
 
 ## License
