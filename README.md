@@ -45,7 +45,7 @@ As stated by [CodeWeavers support](https://www.codeweavers.com/support/forums/ge
 
 **CX MF-Fix** bridges this gap by allowing users to choose between two different methods: **mf-fix** or the **GStreamer patch**.
 
-- **mf-fix:** Manually installs the native Windows DLLs directly into the game's bottle. This provides full compatibility with games that Wine's built-in implementation cannot yet handle. (**Note**: This fix is applied to a single bottle)
+- **MF Fix:** Manually installs the native Windows DLLs directly into the game's bottle. This provides full compatibility with games that Wine's built-in implementation cannot yet handle. (**Note**: This fix is applied to a single bottle)
 - **GStreamer patch:** Replaces the pre-installed GStreamer libraries inside CrossOver with a custom, comprehensive version containing all proprietary plugins and decoders (Good, Bad, and Ugly). This unlocks video and cutscene playback across your games. (**Note**: This patch modifies CrossOver's application files)
 
 This application provides a native macOS graphical interface for making it easier to apply the fix without using Terminal commands.
