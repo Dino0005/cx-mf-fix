@@ -216,7 +216,7 @@ Aggiornando CrossOver (es. da 25 a 25.1 o 26), la configurazione della bottiglia
 
 ## Dettagli Tecnici
 
-**MF-Fix** esegue i seguenti passaggi per abilitare il supporto Media Foundation:
+**MF Fix** esegue i seguenti passaggi per abilitare il supporto Media Foundation:
 
 1. **Estrazione**: Estrae il file `mf-dlls.zip` incorporato contenente:
    - DLL a 64-bit per `system32/`
