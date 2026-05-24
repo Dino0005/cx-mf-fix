@@ -103,7 +103,7 @@ To fix this, open Terminal and run:
 
 ## Usage
 
-### MF-Fix
+### MF Fix
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Dino0005/cx-mf-fix/main/images/Screenshot CX mf-fix.png" width="70%">
@@ -119,7 +119,7 @@ To fix this, open Terminal and run:
 6. Wait for completion
 7. Done! Your bottle now has Media Foundation support
 
-### How MF-Fix Works
+### How MF Fix Works
 
 The app performs the following steps:
 
