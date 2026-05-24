@@ -24,8 +24,8 @@ This page lists games that have been tested with CX MF-Fix.
 
 ## Tested Games List
 
-| Cover | Game | Status | CrossOver Version | Notes |
-|-------|------|--------|-------------------|-------|
-| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/544750/library_600x900.jpg" width="100"> | **SOULCALIBUR VI** | ✅ Working | 25.5+ | Intro and videos play perfectly. <br><br>Backend: D3DMetal<br>MSync: ON |
-| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2492040/library_600x900.jpg" width="100"> | **FATAL FURY: City of the Wolves** | ✅ Working | 25.5+ | Video intro and arcade mode works. <br><br>Backend: D3DMetal<br>MSync: ON|
-
+| Cover | Game | Status | CrossOver Version | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Notes |
+|-------|------|--------|-------------------|---|-------|
+| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/544750/library_600x900.jpg" width="100"> | **SOULCALIBUR VI** | ✅ Working | 25.5+ | MF Fix | Intro and videos play perfectly. <br><br>Backend: D3DMetal<br>MSync: ON |
+| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2492040/library_600x900.jpg" width="100"> | **FATAL FURY: City of the Wolves** | ✅ Working | 25.5+ | MF Fix | Video intro and arcade mode works. <br><br>Backend: D3DMetal<br>MSync: ON|
+| <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601150/library_600x900.jpg" width="100"> | **Devil May Cry 5** | ✅ Working | 26.1+ | GStreamer Patch | Fixed game crashes: <br>Skill previews in the customization menu now working. <br>"History of DMC" video in the main menu plays correctly. <br><br>Backend: D3DMetal<br>MSync: ON|
