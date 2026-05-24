@@ -215,7 +215,7 @@ Updating CrossOver (e.g., from version 25 to 25.1 or 26) may reset the bottle co
 
 ## Technical Details
 
-**MF-Fix** performs the following steps to enable Media Foundation support:
+**MF Fix** performs the following steps to enable Media Foundation support:
 
 1. **Extraction**: Unpacks the embedded `mf-dlls.zip` containing:
    - 64-bit DLLs for `system32/`
