@@ -82,8 +82,9 @@ See [**GAMES.md**](GAMES.md) for a list of games tested and confirmed working wi
 
 1. Download the latest release from [Releases](../../releases)
 2. Move `CX mf-fix.app` to your Applications folder
-3. **First time only**: open the app, If you see the error "Unable to open the application", it's because macOS blocks unsigned apps.
-To fix this, open Terminal and run:
+3. **First time only**: open the app, If you see the message "App cannot be verified because the developer is unknown", you can bypass this warning in one of two ways:
+   1. Via System Settings: Go to System Settings → Privacy & Security and click the "Open Anyway" button.
+   2. Via Terminal: Open the Terminal app and execute the following command (enter your Mac's password when prompted):
 
    ```bash
      sudo xattr -r -d com.apple.quarantine "/Applications/CX mf-fix.app"
