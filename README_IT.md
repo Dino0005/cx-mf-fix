@@ -83,8 +83,9 @@ Vedi [**GAMES.md**](GAMES.md) per una lista di giochi testati e confermati funzi
 
 1. Scarica l'ultima release da [Releases](../../releases)
 2. Sposta `CX mf-fix.app` nella cartella Applicazioni
-3. **Solo la prima volta**: apri l'app. Se vedi l'errore "Impossibile aprire l'applicazione", è perché macOS blocca le app non firmate.
-Per risolvere, apri il Terminale ed esegui:
+3. **Solo la prima volta**: apri l'app. Se viene visualizzato il messaggio "Impossibile verificare l'app perché lo sviluppatore è sconosciuto", puoi autorizzarne l'avvio in due modi:
+   1. Dalle Impostazioni: Vai su Impostazioni di Sistema → Privacy e sicurezza e clicca sul pulsante "Apri comunque".
+   2. Tramite Terminale: Apri il Terminale ed esegui il seguente comando (inserendo la password di amministratore quando richiesta):
 
    ```bash
    sudo xattr -r -d com.apple.quarantine "/Applications/CX mf-fix.app"
