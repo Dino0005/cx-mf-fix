@@ -55,7 +55,7 @@ class GSPatchProcessor {
 
         // Step 2: Backup
         progressCallback?("Creazione backup file esistenti...", 0.2)
-        guard createBackup(zipRoot: zipRoot, lib64Path: lib64Path, pluginPath: pluginPath, progressCallback: progressCallback) else {
+        guard createBackup(cxAppURL: cxAppURL, zipRoot: zipRoot, lib64Path: lib64Path, pluginPath: pluginPath, progressCallback: progressCallback) else {
             progressCallback?("❌ Backup fallito — operazione annullata", 0.2)
             try? fm.removeItem(atPath: tmpDir)
             return false
@@ -271,6 +271,23 @@ class GSPatchProcessor {
 
     // MARK: - Private helpers
 
+    static func crossOverVersion(at appURL: URL) -> String? {
+        let plistPath = appURL.path + "/Contents/Info.plist"
+        guard let dict = NSDictionary(contentsOfFile: plistPath),
+              let version = dict["CFBundleShortVersionString"] as? String else {
+            return nil
+        }
+        return version
+    }
+
+    static func backupCrossOverVersion() -> String? {
+        guard backupExists else { return nil }
+        let tmpDir = NSTemporaryDirectory() + "cxgs_ver_\(UUID().uuidString)"
+        defer { try? FileManager.default.removeItem(atPath: tmpDir) }
+        guard unzip(at: backupURL.path, to: tmpDir) else { return nil }
+        return try? String(contentsOfFile: tmpDir + "/cx_version.txt", encoding: .utf8)
+    }
+
     static func trashBackup() -> Bool {
         guard backupExists else { return true }
         do {
@@ -297,7 +314,7 @@ class GSPatchProcessor {
         return nil
     }
 
-    private static func createBackup(zipRoot: String, lib64Path: String, pluginPath: String, progressCallback: ProgressCallback?) -> Bool {
+    private static func createBackup(cxAppURL: URL, zipRoot: String, lib64Path: String, pluginPath: String, progressCallback: ProgressCallback?) -> Bool {
         let fm = FileManager.default
         let backupTmp = NSTemporaryDirectory() + "cxgs_backup_\(UUID().uuidString)"
 
@@ -357,6 +374,10 @@ class GSPatchProcessor {
         // Salva snapshot (lista completa dei file originali)
         try? snapshotRoot.write(toFile: backupTmp + "/snapshot_lib64_root.txt", atomically: true, encoding: .utf8)
         try? snapshotPlugins.write(toFile: backupTmp + "/snapshot_gstreamer_plugins.txt", atomically: true, encoding: .utf8)
+
+        // Salva versione CrossOver nel backup
+        let cxVersion = crossOverVersion(at: cxAppURL) ?? "unknown"
+        try? cxVersion.write(toFile: backupTmp + "/cx_version.txt", atomically: true, encoding: String.Encoding.utf8)
 
         let success = zip(directory: backupTmp, to: backupURL.path)
         try? fm.removeItem(atPath: backupTmp)

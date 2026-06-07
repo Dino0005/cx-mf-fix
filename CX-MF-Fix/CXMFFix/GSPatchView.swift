@@ -13,6 +13,8 @@ struct GSPatchView: View {
     @State private var showingConfirm = false
     @State private var pendingAction: GSAction = .patch
     @State private var backupExists = GSPatchProcessor.backupExists
+    @State private var cxVersion: String? = nil
+    @State private var backupCxVersion: String? = GSPatchProcessor.backupCrossOverVersion()
 
     enum GSAction { case patch, restore }
 
@@ -86,9 +88,20 @@ struct GSPatchView: View {
                 .foregroundColor(cxAppURL != nil ? .green.opacity(0.8) : .orange.opacity(0.8))
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(cxAppURL?.lastPathComponent ?? L10n.gsNoCxSelected)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.white)
+                HStack(spacing: 6) {
+                    Text(cxAppURL?.lastPathComponent ?? L10n.gsNoCxSelected)
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white)
+                    if let ver = cxVersion {
+                        Text("v\(ver)")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(.blue.opacity(0.8))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.blue.opacity(0.15))
+                            .cornerRadius(4)
+                    }
+                }
                 Text(cxAppURL?.path ?? L10n.gsSelectCxHint)
                     .font(.system(size: 11, design: .monospaced))
                     .foregroundColor(.gray.opacity(0.6))
@@ -99,9 +112,16 @@ struct GSPatchView: View {
             Spacer()
 
             if backupExists {
-                Label(L10n.gsBackupAvailable, systemImage: "checkmark.seal.fill")
-                    .font(.system(size: 11))
-                    .foregroundColor(.green.opacity(0.8))
+                VStack(alignment: .trailing, spacing: 2) {
+                    Label(L10n.gsBackupAvailable, systemImage: "checkmark.seal.fill")
+                        .font(.system(size: 11))
+                        .foregroundColor(.green.opacity(0.8))
+                    if let ver = backupCxVersion {
+                        Text("CrossOver v\(ver)")
+                            .font(.system(size: 10, design: .monospaced))
+                            .foregroundColor(.gray.opacity(0.5))
+                    }
+                }
             }
 
             Button(action: selectCrossOver) {
@@ -258,6 +278,7 @@ struct GSPatchView: View {
                 let lib64 = url.path + "/Contents/SharedSupport/CrossOver/lib64"
                 if FileManager.default.fileExists(atPath: lib64) {
                     cxAppURL = url
+                    cxVersion = GSPatchProcessor.crossOverVersion(at: url)
                 } else {
                     resultMessage = L10n.gsInvalidCxApp
                     resultIsSuccess = false
@@ -304,6 +325,7 @@ struct GSPatchView: View {
                     _ = GSPatchProcessor.trashBackup()
                 }
                 backupExists = GSPatchProcessor.backupExists
+                backupCxVersion = GSPatchProcessor.backupCrossOverVersion()
                 resultIsSuccess = success
                 resultMessage = success
                     ? (action == .patch ? L10n.gsSuccessPatch : L10n.gsSuccessRestore)
@@ -318,6 +340,7 @@ struct GSPatchView: View {
         progressLog = []
         currentProgress = 0.0
         backupExists = GSPatchProcessor.backupExists
+        backupCxVersion = GSPatchProcessor.backupCrossOverVersion()
     }
 
     private func saveLog() {
