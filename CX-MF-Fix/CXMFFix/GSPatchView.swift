@@ -15,6 +15,7 @@ struct GSPatchView: View {
     @State private var backupExists = GSPatchProcessor.backupExists
     @State private var cxVersion: String? = nil
     @State private var backupCxVersion: String? = GSPatchProcessor.backupCrossOverVersion()
+    @State private var showingVersionMismatch = false
 
     enum GSAction { case patch, restore }
 
@@ -60,6 +61,16 @@ struct GSPatchView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.2, green: 0.21, blue: 0.25))
+        .alert(L10n.gsVersionMismatchTitle, isPresented: $showingVersionMismatch) {
+            Button(L10n.alertButtonCancel, role: .cancel) { }
+            Button(L10n.gsVersionMismatchDelete, role: .destructive) {
+                _ = GSPatchProcessor.trashBackup()
+                backupExists = GSPatchProcessor.backupExists
+                backupCxVersion = GSPatchProcessor.backupCrossOverVersion()
+            }
+        } message: {
+            Text(L10n.gsVersionMismatchMessage(backupCxVersion ?? "?", cxVersion ?? "?"))
+        }
         .alert(L10n.alertWarningTitle, isPresented: $showingConfirm) {
             Button(L10n.alertButtonCancel, role: .cancel) { }
             Button(pendingAction == .patch ? L10n.gsPatchButton : L10n.gsRestoreButton) {
@@ -279,6 +290,14 @@ struct GSPatchView: View {
                 if FileManager.default.fileExists(atPath: lib64) {
                     cxAppURL = url
                     cxVersion = GSPatchProcessor.crossOverVersion(at: url)
+                    // Controlla mismatch versione con backup esistente
+                    backupCxVersion = GSPatchProcessor.backupCrossOverVersion()
+                    if backupExists,
+                       let cv = cxVersion,
+                       let bv = backupCxVersion,
+                       cv != bv {
+                        showingVersionMismatch = true
+                    }
                 } else {
                     resultMessage = L10n.gsInvalidCxApp
                     resultIsSuccess = false
