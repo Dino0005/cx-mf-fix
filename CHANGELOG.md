@@ -5,12 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.1] - 2026-06-07
+## [1.1.1] - 2026-06-11
 
 ### Added
 - GStreamer Patch tab improvements:
   - CrossOver version is now displayed next to the selected app name
   - The backup badge now shows the CrossOver version the backup was created from
+  - Version mismatch detection: if the selected CrossOver version differs from the one the backup was created with, a warning prompts the user to delete the incompatible backup before applying a fresh patch
 
 ## [1.1.0] - 2026-05-23
 
