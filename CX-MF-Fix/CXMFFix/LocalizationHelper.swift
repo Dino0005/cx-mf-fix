@@ -102,4 +102,11 @@ enum L10n {
     static let gsSelectCxMessage = String(localized: "gs.select.cx.message")
     static let gsSelectCxPrompt = String(localized: "gs.select.cx.prompt")
     static let gsInvalidCxApp = String(localized: "gs.invalid.cx.app")
+    static let gsVersionMismatchTitle = String(localized: "gs.version.mismatch.title")
+    static let gsVersionMismatchDelete = String(localized: "gs.version.mismatch.delete")
+    static func gsVersionMismatchMessage(_ backupVersion: String, _ currentVersion: String) -> String {
+        let template = String(localized: "gs.version.mismatch.message",
+                              defaultValue: "The existing backup was created with CrossOver %1$@, but you selected CrossOver %2$@. The backup is not compatible with this version. Delete it to apply a fresh patch?")
+        return String(format: template, backupVersion, currentVersion)
+    }
 }
