@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GStreamer Patch tab improvements:
   - CrossOver version is now displayed next to the selected app name
   - The backup badge now shows the CrossOver version the backup was created from
+  - Backup version badge separated from the selector pane
   - Version mismatch detection: if the selected CrossOver version differs from the one the backup was created with, a warning prompts the user to delete the incompatible backup before applying a fresh patch
 
 ## [1.1.0] - 2026-05-23
