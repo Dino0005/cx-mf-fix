@@ -41,7 +41,30 @@ struct GSPatchView: View {
                 .padding(.top, 20)
 
             Spacer()
-                .frame(height: 30)
+                .frame(height: 16)
+
+            // Backup info badge
+            if backupExists {
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark.seal.fill")
+                        .font(.system(size: 13))
+                        .foregroundColor(.green.opacity(0.8))
+                    Text(L10n.gsBackupAvailable)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.green.opacity(0.8))
+                    if let ver = backupCxVersion {
+                        Text("· CrossOver v\(ver)")
+                            .font(.system(size: 12, design: .monospaced))
+                            .foregroundColor(.gray.opacity(0.5))
+                    }
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 40)
+            }
+
+            Spacer()
+                .frame(height: 16)
 
             // Log
             if isProcessing || operationCompleted {
@@ -121,19 +144,6 @@ struct GSPatchView: View {
             }
 
             Spacer()
-
-            if backupExists {
-                VStack(alignment: .trailing, spacing: 2) {
-                    Label(L10n.gsBackupAvailable, systemImage: "checkmark.seal.fill")
-                        .font(.system(size: 11))
-                        .foregroundColor(.green.opacity(0.8))
-                    if let ver = backupCxVersion {
-                        Text("CrossOver v\(ver)")
-                            .font(.system(size: 10, design: .monospaced))
-                            .foregroundColor(.gray.opacity(0.5))
-                    }
-                }
-            }
 
             Button(action: selectCrossOver) {
                 Text(cxAppURL != nil ? L10n.gsChangeCx : L10n.gsSelectCx)
