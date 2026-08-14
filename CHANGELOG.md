@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-08-14
+### Fixed
+- MF Fix: replaced nine separate `reg add` calls with a single `.reg` file import for DLL overrides — faster and more reliable
+- MF Fix: use full Windows paths (`C:\windows\regedit.exe`, `C:\windows\system32\regsvr32.exe`) for compatibility with CrossOver's `--cx-app` wrapper
+- MF Fix: registry files (`mf.reg`, `wmf.reg`) are now imported in both 64-bit and 32-bit architectures — previously 32-bit games could not enumerate Media Foundation handlers
+- MF Fix: COM components (`colorcnv`, `msmpeg2adec`, `msmpeg2vdec`) are now registered with `regsvr32` in both 64-bit and 32-bit — registering `msmpeg2vdec` in 32-bit writes the H.264 decoder's `InputTypes`/`OutputTypes`, fixing black video in 32-bit games
+- MF Fix: removed incorrect popup warning from UI and progress log
+
+### Changed
+- Bundled GStreamer updated from 1.28.3 to 1.28.6
+
 ## [1.1.1] - 2026-06-11
 
 ### Added
