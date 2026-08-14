@@ -130,13 +130,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the fix process, you may see 3 popup windows from RegSvr32 confirming DLL registration. This is normal - please click OK on each one.\n\nIf prompted, you'll also need to enter your Mac password to modify system files."
+            "value" : "Before proceeding, make sure to close CrossOver and any running bottles."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Durante il processo di fix, potrebbero apparire 3 finestre popup da RegSvr32 per confermare la registrazione delle DLL. Questo è normale - clicca OK su ognuna.\n\nSe richiesto, dovrai inserire la password del Mac per modificare i file di sistema."
+            "value" : "Prima di procedere, assicurati di chiudere CrossOver e tutte le bottiglie in esecuzione."
           }
         }
       }

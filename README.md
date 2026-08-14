@@ -116,20 +116,18 @@ See [**GAMES.md**](GAMES.md) for a list of games tested and confirmed working wi
    - Bottles are typically located in: `~/Library/Application Support/CrossOver/Bottles/`
 3. Click "Apply Fix"
 4. Confirm the information dialog
-5. Click OK on the 3 RegSvr32 popup windows that appear (These popups are normal as Wine is registering the new DLLs in the bottle's environment)
-6. Wait for completion
-7. Done! Your bottle now has Media Foundation support
+5. Wait for completion
+6. Done! Your bottle now has Media Foundation support
 
 ### How MF Fix Works
 
 The app performs the following steps:
 
 1. Extracts Media Foundation DLL files from the embedded archive
-2. Copies 64-bit DLLs to `drive_c/windows/system32/`
-3. Copies 32-bit DLLs to `drive_c/windows/syswow64/`
-4. Configures Wine DLL overrides
-5. Imports required registry entries
-6. Registers the DLLs with the system
+2. Copies 64-bit DLLs to `drive_c/windows/system32/` and 32-bit DLLs to `drive_c/windows/syswow64/` (removes before copying — Wine ships some of these as symlinks to its own builtins)
+3. Sets Wine DLL overrides via a single `.reg` file (applied **before** registration so they target Microsoft DLLs, not Wine's builtins)
+4. Imports `mf.reg` and `wmf.reg` in **both 64-bit and 32-bit** architectures (required for 32-bit games to enumerate Media Foundation handlers)
+5. Registers COM components with `regsvr32` in **both 64-bit and 32-bit** (registering `msmpeg2vdec` writes the H.264 decoder's input/output types — without this, video stays black even with all DLLs in place)
 
 ##
 
@@ -226,18 +224,20 @@ Updating CrossOver (e.g., from version 25 to 25.1 or 26) may reset the bottle co
    - `drive_c/windows/system32/` (64-bit versions)
    - `drive_c/windows/syswow64/` (32-bit versions)
 
-3. **Configuration**: Sets Wine DLL overrides to use native Windows implementations:
+3. **Configuration**: Sets Wine DLL overrides via a single `.reg` file for all nine libraries:
    - `colorcnv`, `mf`, `mferror`, `mfplat`, `mfplay`
    - `mfreadwrite`, `msmpeg2adec`, `msmpeg2vdec`, `sqmapi`
+   - Overrides are applied **before** registration so they target the Microsoft DLLs, not Wine's builtins
 
-4. **Registry**: Imports required registry entries (`mf.reg`, `wmf.reg`) for Media Foundation initialization
+4. **Registry**: Imports `mf.reg` and `wmf.reg` in **both 64-bit and 32-bit** architectures
+   - A 32-bit process reads the redirected `Wow6432Node` view — a 64-bit-only import leaves 32-bit games seeing nothing
 
-5. **Registration**: Registers the DLLs with RegSvr32:
+5. **Registration**: Registers COM components with `regsvr32` in **both 64-bit and 32-bit**:
    - `colorcnv.dll`
    - `msmpeg2adec.dll` (MPEG-2 audio decoder)
-   - `msmpeg2vdec.dll` (MPEG-2 video decoder)
+   - `msmpeg2vdec.dll` (MPEG-2 video decoder — registering this writes the H.264 decoder's `InputTypes`/`OutputTypes`; without it, MF enumerates no decoder and video stays black)
 
-This ensures that when a game makes Media Foundation API calls, the original Windows DLLs handle the requests, providing full codec support.
+This ensures that when a game makes Media Foundation API calls, the original Windows DLLs handle the requests, providing full codec support for both 32-bit and 64-bit games.
 
 **GStreamer patch** performs the following steps to upgrade CrossOver's multimedia framework:
 
