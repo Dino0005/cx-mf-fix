@@ -15,7 +15,6 @@ This script automates the installation of Windows Media Foundation DLLs into Cro
 - macOS
 - CrossOver installed in `/Applications/CrossOver.app`
 - Terminal/command-line access
-- Administrator privileges (password may be required)
 
 ## Files Needed
 
@@ -78,11 +77,9 @@ chmod +x mf-fix-cx.sh
 1. Validates the bottle path
 2. Copies 64-bit DLLs to `drive_c/windows/system32/`
 3. Copies 32-bit DLLs to `drive_c/windows/syswow64/`
-4. Sets Wine DLL overrides for Media Foundation libraries
-5. Imports registry entries (`mf.reg`, `wmf.reg`)
-6. Registers DLLs with RegSvr32
-
-**Note**: You will see 3 RegSvr32 popup windows - click OK on each.
+4. Sets Wine DLL overrides via a single `.reg` file (overrides are applied **before** registration so they target the Microsoft DLLs, not Wine's builtins)
+5. Imports `mf.reg` and `wmf.reg` in **both 64-bit and 32-bit** architectures (required for 32-bit games to enumerate Media Foundation handlers)
+6. Registers COM components with `regsvr32` in **both 64-bit and 32-bit** (registering `msmpeg2vdec` writes the H.264 decoder's input/output types — without this step video stays black even with all DLLs in place)
 
 ## Troubleshooting
 
@@ -96,12 +93,15 @@ Make sure the path points to a valid CrossOver bottle (must contain `drive_c` fo
 chmod +x mf-fix-cx.sh
 ```
 
+### Video Still Black After Fix
+
+Make sure CrossOver and all bottles are closed before running the script. Re-apply the fix after a CrossOver update, as updates may overwrite the installed DLLs.
+
 ## Exit Codes
 
 - `0` - Success
-- `2` - Invalid directory path
-- `3` - Wine prefix path not set
-- `4` - Invalid Wine prefix (no `drive_c` folder)
+- `1` - Missing argument or invalid path
+- `2` - CrossOver not found in `/Applications`
 
 ## Help
 

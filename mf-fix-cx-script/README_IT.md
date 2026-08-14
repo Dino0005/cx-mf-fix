@@ -1,56 +1,55 @@
-# Script MF-Fix CrossOver
+# MF-Fix CrossOver Script
 
 **[English](README.md)** | **Italiano**
 
-Script bash da riga di comando per applicare fix Media Foundation alle bottiglie CrossOver.
+Script bash da riga di comando per applicare il fix Media Foundation alle bottiglie CrossOver.
 
 ## Descrizione
 
-Questo script automatizza l'installazione delle DLL Windows Media Foundation nelle bottiglie CrossOver, abilitando la riproduzione video nei giochi che richiedono il supporto nativo di Media Foundation.
+Questo script automatizza l'installazione delle DLL Windows Media Foundation nelle bottiglie CrossOver, abilitando la riproduzione video nei giochi che richiedono il supporto nativo a Media Foundation.
 
-**Preferisci un'interfaccia grafica?** Usa l'[app GUI CX MF-Fix](https://github.com/Dino0005/cx-mf-fix).
+**Preferisci un'interfaccia grafica?** Usa l'[app CX MF-Fix](https://github.com/Dino0005/cx-mf-fix).
 
 ## Requisiti
 
 - macOS
 - CrossOver installato in `/Applications/CrossOver.app`
-- Accesso al Terminale/riga di comando
-- Privilegi di amministratore (potrebbe essere richiesta la password)
+- Accesso al Terminale
 
-## File Necessari
+## File necessari
 
-Lo script richiede questi file nella stessa directory:
+Lo script richiede i seguenti file nella stessa cartella:
 
-- `mf-fix-cx.sh` - Lo script principale
-- `system32/` - Cartella con DLL a 64-bit
-- `syswow64/` - Cartella con DLL a 32-bit
+- `mf-fix-cx-it.sh` - Lo script principale
+- `system32/` - Cartella con le DLL a 64-bit
+- `syswow64/` - Cartella con le DLL a 32-bit
 - `mf.reg` - File di registro
 - `wmf.reg` - File di registro
 
-Scarica `mf-dlls.zip` dalle [Releases](https://github.com/Dino0005/cx-mf-fix/releases) ed estrailo nella directory dello script.
+Scarica `mf-dlls.zip` dalla sezione [Releases](https://github.com/Dino0005/cx-mf-fix/releases) ed estrailo nella stessa cartella dello script.
 
 ## Installazione
 
 1. Scarica lo script e i file necessari
 2. Estrai `mf-dlls.zip` per ottenere le cartelle `system32/` e `syswow64/`
-3. Posiziona tutti i file nella stessa directory
+3. Posiziona tutti i file nella stessa cartella
 4. Rendi lo script eseguibile:
 
 ```bash
-chmod +x mf-fix-cx.sh
+chmod +x mf-fix-cx-it.sh
 ```
 
 ## Utilizzo
 
-### Utilizzo Base
+### Utilizzo base
 
 ```bash
-./mf-fix-cx.sh "/Users/MioUtente/Library/Application Support/CrossOver/Bottles/NomeBottiglia"
+./mf-fix-cx-it.sh "/Users/NomeUtente/Library/Application Support/CrossOver/Bottles/NomeBottiglia"
 ```
 
-### Trova il Percorso della Tua Bottiglia
+### Trovare il percorso della bottiglia
 
-Le tue bottiglie CrossOver si trovano tipicamente in:
+Le bottiglie CrossOver si trovano tipicamente in:
 ```
 ~/Library/Application Support/CrossOver/Bottles/
 ```
@@ -60,72 +59,73 @@ Elenca le tue bottiglie:
 ls ~/Library/Application\ Support/CrossOver/Bottles/
 ```
 
-### Esempio Completo
+### Esempio completo
 
 ```bash
-# Vai alla directory dello script
+# Naviga nella cartella dello script
 cd ~/Downloads/mf-fix-cx-script
 
 # Rendi eseguibile
-chmod +x mf-fix-cx.sh
+chmod +x mf-fix-cx-it.sh
 
-# Esegui la fix
-./mf-fix-cx.sh "/Users/MioUtente/Library/Application Support/CrossOver/Bottles/MioGioco"
+# Esegui il fix
+./mf-fix-cx-it.sh "/Users/NomeUtente/Library/Application Support/CrossOver/Bottles/MioGioco"
 ```
 
-## Cosa Fa lo Script
+## Cosa fa lo script
 
 1. Valida il percorso della bottiglia
 2. Copia le DLL a 64-bit in `drive_c/windows/system32/`
 3. Copia le DLL a 32-bit in `drive_c/windows/syswow64/`
-4. Imposta gli override delle DLL di Wine per le librerie Media Foundation
-5. Importa le voci di registro (`mf.reg`, `wmf.reg`)
-6. Registra le DLL con RegSvr32
+4. Imposta gli override Wine tramite un unico file `.reg` (gli override vengono applicati **prima** della registrazione, così puntano alle DLL Microsoft e non ai builtin di Wine)
+5. Importa `mf.reg` e `wmf.reg` in **entrambe le architetture 64-bit e 32-bit** (necessario affinché i giochi a 32-bit possano enumerare i gestori Media Foundation)
+6. Registra i componenti COM con `regsvr32` in **entrambe le architetture** (registrare `msmpeg2vdec` scrive i tipi di input/output del decoder H.264 — senza questo passaggio il video resta nero anche con tutte le DLL al posto giusto)
 
-**Nota**: Vedrai 3 finestre popup RegSvr32 - clicca OK su ognuna.
+## Risoluzione dei problemi
 
-## Risoluzione Problemi
-
-### Errore Bottiglia Non Valida
+### Errore percorso bottiglia non valido
 
 Assicurati che il percorso punti a una bottiglia CrossOver valida (deve contenere la cartella `drive_c`).
 
-### Script Non Eseguibile
+### Script non eseguibile
 
 ```bash
-chmod +x mf-fix-cx.sh
+chmod +x mf-fix-cx-it.sh
 ```
 
-## Codici di Uscita
+### Video ancora nero dopo il fix
+
+Assicurati che CrossOver e tutte le bottiglie siano chiuse prima di eseguire lo script. Riapplica il fix dopo un aggiornamento di CrossOver, poiché gli aggiornamenti possono sovrascrivere le DLL installate.
+
+## Codici di uscita
 
 - `0` - Successo
-- `2` - Percorso directory non valido
-- `3` - Percorso prefisso Wine non impostato
-- `4` - Prefisso Wine non valido (nessuna cartella `drive_c`)
+- `1` - Argomento mancante o percorso non valido
+- `2` - CrossOver non trovato in `/Applications`
 
 ## Aiuto
 
 Visualizza il messaggio di aiuto:
 ```bash
-./mf-fix-cx.sh --help
+./mf-fix-cx-it.sh --help
 ```
 
-## Confronto: Script vs App GUI
+## Confronto: Script vs App grafica
 
-| Caratteristica | Script | App GUI |
-|----------------|--------|---------|
+| Funzionalità | Script | App grafica |
+|---|---|---|
 | Interfaccia | Terminale | Grafica |
-| Progresso | Output testuale | Barra di progresso in tempo reale |
-| Facilità d'uso | Moderata | Facile |
+| Progresso | Output testuale | Barra di avanzamento in tempo reale |
+| Facilità d'uso | Moderata | Semplice |
 | Automazione | Scriptabile | Manuale |
 
 ## Licenza
 
-Questo script fa parte del progetto CX MF-Fix, sotto licenza MIT.
+Questo script fa parte del progetto CX MF-Fix, distribuito con licenza MIT.
 
 ## Crediti
 
-- Basato sul concetto originale dello script bash mf-fix Proton, adattato per CrossOver su macOS
+- Basato sullo script bash originale mf-fix per Proton di z0z0z, adattato per CrossOver su macOS
 
 ---
 
